@@ -1,3 +1,4 @@
+import 'package:educto2/main.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/my_colors.dart';
@@ -15,66 +16,87 @@ class ForMePage extends StatefulWidget {
 }
 
 class _ForMePageState extends State<ForMePage> {
+  var scaffoldKey7 = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    return forMePage();
+    return forMePage(key: scaffoldKey7);
   }
 
-  Scaffold forMePage() {
-    return Scaffold(
-      backgroundColor: MyColors.secondary,
-      appBar: appBar(title: MyTexts.forMe),
-      body: MyPaddings.pagePadding(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                interestChip(title: "Teknoloji", isLight: true),
-                interestChip(title: "Bilim", isLight: true),
-                interestChip(title: "Müzik", isLight: true),
-                interestChip(title: "Coğrafya", isLight: true),
-                interestChip(title: "Spor", isLight: true)
-              ],
-            ),
-            myDvider(),
-            MyPaddings.standartPadding(
-              child: Text(
-                MyTexts.forMeInfo,
-                style: MyTextstyles.info(isMini: true),
+  Widget forMePage({GlobalKey<ScaffoldState>? key}) {
+    return SafeArea(
+      child: Scaffold(
+        key: key,
+        endDrawer: drawer(),
+        backgroundColor: MyColors.secondary,
+        appBar: appBar(title: MyTexts.forMe, key: key),
+        body: MyPaddings.pagePadding(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    interestChip(title: "Teknoloji", isLight: true),
+                    interestChip(title: "Bilim", isLight: true),
+                    interestChip(title: "Müzik", isLight: true),
+                    interestChip(title: "Coğrafya", isLight: true),
+                    interestChip(title: "Spor", isLight: true)
+                  ],
+                ),
               ),
-            ),
-            contentBar(
-                image: "photo1.jpg",
-                readCount: "1069",
-                title: MyTexts.contentTitle,
-                shortDesc: MyTexts.contentShort),
-            contentBar(
-                image: "photo1.jpg",
-                readCount: "785",
-                title: MyTexts.contentTitle2,
-                shortDesc: MyTexts.contentShort),
-            contentBar(
-                image: "photo1.jpg",
-                readCount: "1069",
-                title: MyTexts.contentTitle,
-                shortDesc: MyTexts.contentShort),
-            contentBar(
-                image: "photo1.jpg",
-                readCount: "785",
-                title: MyTexts.contentTitle2,
-                shortDesc: MyTexts.contentShort),
-            contentBar(
-                image: "photo1.jpg",
-                readCount: "1069",
-                title: MyTexts.contentTitle,
-                shortDesc: MyTexts.contentShort),
-            contentBar(
-                image: "photo1.jpg",
-                readCount: "785",
-                title: MyTexts.contentTitle2,
-                shortDesc: MyTexts.contentShort)
-          ],
+              myDvider(),
+              Expanded(
+                child: ListView(
+                  children: [
+                    MyPaddings.standartPadding(
+                      child: Text(
+                        MyTexts.forMeInfo,
+                        style: MyTextstyles.info(isMini: true),
+                      ),
+                    ),
+                    contentBar(
+                        image: "photo1.jpg",
+                        readCount: "1069",
+                        context: context,
+                        title: MyTexts.contentTitle,
+                        shortDesc: MyTexts.contentShort),
+                    contentBar(
+                        image: "photo1.jpg",
+                        context: context,
+                        readCount: "785",
+                        title: MyTexts.contentTitle2,
+                        shortDesc: MyTexts.contentShort),
+                    contentBar(
+                        image: "photo1.jpg",
+                        context: context,
+                        readCount: "1069",
+                        title: MyTexts.contentTitle,
+                        shortDesc: MyTexts.contentShort),
+                    contentBar(
+                        image: "photo1.jpg",
+                        context: context,
+                        readCount: "785",
+                        title: MyTexts.contentTitle2,
+                        shortDesc: MyTexts.contentShort),
+                    contentBar(
+                        image: "photo1.jpg",
+                        context: context,
+                        readCount: "1069",
+                        title: MyTexts.contentTitle,
+                        shortDesc: MyTexts.contentShort),
+                    contentBar(
+                        image: "photo1.jpg",
+                        context: context,
+                        readCount: "785",
+                        title: MyTexts.contentTitle2,
+                        shortDesc: MyTexts.contentShort)
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

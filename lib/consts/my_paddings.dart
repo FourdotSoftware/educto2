@@ -32,6 +32,10 @@ class MyPaddings {
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: child,
       );
+  static Padding navbarPadding({Widget? child}) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+        child: child,
+      );
 
   static Padding notificationPadding({Widget? child}) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
@@ -44,6 +48,10 @@ class MyPaddings {
       );
   static Padding pagePaddingSymmetric3({Widget? child}) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2),
+        child: child,
+      );
+  static Padding pagePaddingSymmetric4({Widget? child}) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: child,
       );
 }

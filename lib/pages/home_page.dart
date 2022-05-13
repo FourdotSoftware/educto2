@@ -1,4 +1,6 @@
 import 'package:educto2/main.dart';
+import 'package:educto2/pages/content_page.dart';
+import 'package:educto2/pages/last_edit_page.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/my_colors.dart';
@@ -14,92 +16,118 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var scaffoldKey1 = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return homePage();
+    return homePage(key: scaffoldKey1);
   }
 
-  Scaffold homePage() {
-    return Scaffold(
-        bottomNavigationBar: navBar(context),
-        backgroundColor: MyColors.secondary,
-        appBar: appBar(title: MyTexts.appName, isSlogan: true),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              slider(),
-              lastAdded(),
-              MyPaddings.pagePaddingSymmetric(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    contentBar(
-                        image: "photo1.jpg",
-                        readCount: "1069",
-                        title: MyTexts.contentTitle,
-                        shortDesc: MyTexts.contentShort),
-                    contentBar(
-                        image: "photo1.jpg",
-                        readCount: "785",
-                        title: MyTexts.contentTitle2,
-                        shortDesc: MyTexts.contentShort),
-                    contentBar(
-                        image: "photo1.jpg",
-                        readCount: "1069",
-                        title: MyTexts.contentTitle,
-                        shortDesc: MyTexts.contentShort),
-                    contentBar(
-                        image: "photo1.jpg",
-                        readCount: "785",
-                        title: MyTexts.contentTitle2,
-                        shortDesc: MyTexts.contentShort)
-                  ],
-                ),
-              ),
-              MyPaddings.pagePadding(
-                child: Text(
-                  MyTexts.mostRead,
-                  style: MyTextstyles.title2(),
-                ),
-              ),
-              MyPaddings.pagePaddingSymmetric(
-                child: Container(
-                  height: 150,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
+  Widget homePage({GlobalKey<ScaffoldState>? key}) {
+    return SafeArea(
+      child: Scaffold(
+          key: key,
+          endDrawer: drawer(),
+          bottomNavigationBar: navBar(context),
+          backgroundColor: MyColors.secondary,
+          appBar:
+              appBar(title: MyTexts.appName, isSlogan: true, key: scaffoldKey1),
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                slider(),
+                lastAdded(context: context, page: const LastEditPage()),
+                MyPaddings.pagePaddingSymmetric(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      mostReadField(
-                          title: MyTexts.contentTitle3,
+                      contentBar(
                           image: "photo1.jpg",
-                          readCount: "5612"),
-                      mostReadField(
-                          title: MyTexts.contentTitle4,
+                          readCount: "1069",
+                          title: MyTexts.contentTitle,
+                          shortDesc: MyTexts.contentShort,
+                          context: context,
+                          page: const ContentPage()),
+                      contentBar(
                           image: "photo1.jpg",
-                          readCount: "4312"),
-                      mostReadField(
-                          title: MyTexts.contentTitle5,
+                          readCount: "785",
+                          title: MyTexts.contentTitle2,
+                          shortDesc: MyTexts.contentShort,
+                          context: context,
+                          page: const ContentPage()),
+                      contentBar(
                           image: "photo1.jpg",
-                          readCount: "4172"),
-                      mostReadField(
-                          title: MyTexts.contentTitle6,
+                          readCount: "1069",
+                          title: MyTexts.contentTitle,
+                          shortDesc: MyTexts.contentShort,
+                          context: context,
+                          page: const ContentPage()),
+                      contentBar(
                           image: "photo1.jpg",
-                          readCount: "3291"),
-                      mostReadField(
-                          title: MyTexts.contentTitle5,
-                          image: "photo1.jpg",
-                          readCount: "4172"),
-                      mostReadField(
-                          title: MyTexts.contentTitle6,
-                          image: "photo1.jpg",
-                          readCount: "3291"),
+                          readCount: "785",
+                          title: MyTexts.contentTitle2,
+                          shortDesc: MyTexts.contentShort,
+                          context: context,
+                          page: const ContentPage())
                     ],
                   ),
                 ),
-              )
-            ],
-          ),
-        ));
+                MyPaddings.pagePadding(
+                  child: Text(
+                    MyTexts.mostRead,
+                    style: MyTextstyles.title2(),
+                  ),
+                ),
+                MyPaddings.pagePaddingSymmetric(
+                  child: SizedBox(
+                    height: 150,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        mostReadField(
+                            title: MyTexts.contentTitle3,
+                            image: "photo1.jpg",
+                            readCount: "5612",
+                            context: context,
+                            page: const ContentPage()),
+                        mostReadField(
+                            title: MyTexts.contentTitle4,
+                            image: "photo1.jpg",
+                            readCount: "4312",
+                            context: context,
+                            page: const ContentPage()),
+                        mostReadField(
+                            title: MyTexts.contentTitle5,
+                            image: "photo1.jpg",
+                            readCount: "4172",
+                            context: context,
+                            page: const ContentPage()),
+                        mostReadField(
+                            title: MyTexts.contentTitle6,
+                            image: "photo1.jpg",
+                            readCount: "3291",
+                            context: context,
+                            page: const ContentPage()),
+                        mostReadField(
+                            title: MyTexts.contentTitle5,
+                            image: "photo1.jpg",
+                            readCount: "4172",
+                            context: context,
+                            page: const ContentPage()),
+                        mostReadField(
+                            title: MyTexts.contentTitle6,
+                            image: "photo1.jpg",
+                            readCount: "3291",
+                            context: context,
+                            page: const ContentPage()),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )),
+    );
   }
 
   Container slider() {
@@ -143,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           width: 4,
                           height: 120,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             gradient: LinearGradient(
                                 begin: Alignment.bottomCenter,
                                 end: Alignment.topCenter,
@@ -155,9 +183,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         MyPaddings.standartPadding(
-                          child: Text(
-                            MyTexts.sliderTitleDesc,
-                            style: MyTextstyles.bodyText2(isLight: true),
+                          child: SizedBox(
+                            width: 150,
+                            child: Text(
+                              MyTexts.welcomeDesc,
+                              style: MyTextstyles.bodyText2(isLight: true),
+                            ),
                           ),
                         ),
                       ],
@@ -172,7 +203,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget lastAdded() => MyPaddings.pagePadding(
+  Widget lastAdded({BuildContext? context, Widget? page}) =>
+      MyPaddings.pagePadding(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -180,9 +212,15 @@ class _HomePageState extends State<HomePage> {
               MyTexts.lastAdded,
               style: MyTextstyles.title2(),
             ),
-            Text(
-              MyTexts.seeAll,
-              style: MyTextstyles.info(isMini: true),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context!, MaterialPageRoute(builder: (context) => page!));
+              },
+              child: Text(
+                MyTexts.seeAll,
+                style: MyTextstyles.info(isMini: true),
+              ),
             )
           ],
         ),
@@ -192,7 +230,8 @@ class _HomePageState extends State<HomePage> {
 AppBar appBar(
         {String? title,
         bool isSlogan = false,
-        Color color = MyColors.secondary}) =>
+        Color color = MyColors.secondary,
+        GlobalKey<ScaffoldState>? key}) =>
     AppBar(
       elevation: 0,
       backgroundColor: color,
@@ -215,69 +254,86 @@ AppBar appBar(
           ),
         ],
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Stack(
-            alignment: AlignmentDirectional.centerEnd,
-            children: [
-              notifications(),
-              haveNoti(),
-            ],
-          ),
-        )
-      ],
+      actions: [notificationButton(key: key)],
     );
 
-Icon notifications() => Icon(Icons.notifications_outlined);
-
-Icon haveNoti() =>
-    Icon(Icons.fiber_manual_record, color: (MyColors.primary), size: 12);
-Widget contentBar(
-        {String? image, String? readCount, String? title, String? shortDesc}) =>
-    MyPaddings.lowPadding(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+Widget notificationButton({GlobalKey<ScaffoldState>? key}) {
+  return InkWell(
+    onTap: () {
+      key!.currentState!.openEndDrawer();
+    },
+    child: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Stack(
+        alignment: AlignmentDirectional.centerEnd,
         children: [
-          contentImageFeild(image: image, readCount: readCount, isMini: true),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              MyPaddings.lowPadding(
-                  child: Text(title!, style: MyTextstyles.title3())),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: Container(
-                      width: 3,
-                      height: 31,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: [
-                            MyColors.primary,
-                            MyColors.gradientEnd
-                          ])),
-                    ),
-                  ),
-                  Text(
-                    shortDesc!,
-                    style: MyTextstyles.bodyText2(),
-                  ),
-                ],
-              ),
-            ],
-          )
+          notifications(),
+          haveNoti(),
         ],
       ),
-    );
+    ),
+  );
+}
 
+Icon notifications() => const Icon(Icons.notifications_outlined);
+
+Icon haveNoti() =>
+    const Icon(Icons.fiber_manual_record, color: (MyColors.primary), size: 12);
+Widget contentBar(
+        {String? image,
+        String? readCount,
+        String? title,
+        String? shortDesc,
+        BuildContext? context,
+        Widget? page = const ContentPage()}) =>
+    InkWell(
+      onTap: () {
+        Navigator.push(
+            context!, MaterialPageRoute(builder: (context) => page!));
+      },
+      child: MyPaddings.lowPadding(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            contentImageFeild(image: image, readCount: readCount, isMini: true),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                MyPaddings.lowPadding(
+                    child: Text(title!, style: MyTextstyles.title3())),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Container(
+                        width: 3,
+                        height: 31,
+                        decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                              MyColors.primary,
+                              MyColors.gradientEnd
+                            ])),
+                      ),
+                    ),
+                    Text(
+                      shortDesc!,
+                      style: MyTextstyles.bodyText2(),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
 Widget contentImageFeild(
         {String? image, String? readCount, bool isMini = false}) =>
     Stack(
@@ -297,10 +353,10 @@ Widget contentImageFeild(
           width: isMini ? 65 : 96,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
-                colors: [Color(0xff000000), Color(0x00000000)]),
+                colors: [const Color(0xff000000), const Color(0x00000000)]),
           ),
         ),
         Row(
@@ -308,7 +364,7 @@ Widget contentImageFeild(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MyPaddings.lowPadding(
-              child: Icon(
+              child: const Icon(
                 Icons.visibility_outlined,
                 color: Colors.white,
                 size: 12,
@@ -324,17 +380,28 @@ Widget contentImageFeild(
         ),
       ],
     );
-Widget mostReadField({String? title, String? image, String? readCount}) =>
-    MyPaddings.lowPadding(
-      child: Column(
-        children: [
-          contentImageFeild(
-              image: image!, readCount: readCount!, isMini: false),
-          Text(
-            title!,
-            style: MyTextstyles.bodyText2(isLight: true, isBold: true),
-            textAlign: TextAlign.center,
-          )
-        ],
+Widget mostReadField(
+        {String? title,
+        String? image,
+        String? readCount,
+        BuildContext? context,
+        Widget? page}) =>
+    InkWell(
+      onTap: () {
+        Navigator.push(
+            context!, MaterialPageRoute(builder: (context) => page!));
+      },
+      child: MyPaddings.lowPadding(
+        child: Column(
+          children: [
+            contentImageFeild(
+                image: image!, readCount: readCount!, isMini: false),
+            Text(
+              title!,
+              style: MyTextstyles.bodyText2(isLight: true, isBold: true),
+              textAlign: TextAlign.center,
+            )
+          ],
+        ),
       ),
     );

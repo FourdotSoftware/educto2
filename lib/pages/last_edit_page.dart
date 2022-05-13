@@ -14,94 +14,111 @@ class LastEditPage extends StatefulWidget {
 }
 
 class _LastEditPageState extends State<LastEditPage> {
+  var scaffoldKey3 = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    return lastEditPage();
+    return lastEditPage(key: scaffoldKey3);
   }
 
-  Scaffold lastEditPage() {
-    return Scaffold(
-      bottomNavigationBar: navBar(context),
-      backgroundColor: MyColors.secondary,
-      appBar: appBar(
-        title: MyTexts.lastEditTitle,
-        isSlogan: false,
-      ),
-      body: SingleChildScrollView(
-        child: MyPaddings.pagePaddingSymmetric(
-          child: Column(
-            children: [
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-              contentBar(
-                  image: "photo1.jpg",
-                  title: MyTexts.contentTitle,
-                  shortDesc: MyTexts.contentShort,
-                  readCount: "1069"),
-            ],
+  Widget lastEditPage({GlobalKey<ScaffoldState>? key}) {
+    return SafeArea(
+      child: Scaffold(
+        key: key,
+        endDrawer: drawer(),
+        bottomNavigationBar: navBar(context),
+        backgroundColor: MyColors.secondary,
+        appBar: appBar(title: MyTexts.lastEditTitle, isSlogan: false, key: key),
+        body: SingleChildScrollView(
+          child: MyPaddings.pagePaddingSymmetric(
+            child: Column(
+              children: [
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    shortDesc: MyTexts.contentShort,
+                    context: context,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    context: context,
+                    title: MyTexts.contentTitle,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    context: context,
+                    shortDesc: MyTexts.contentShort,
+                    readCount: "1069"),
+                contentBar(
+                    image: "photo1.jpg",
+                    title: MyTexts.contentTitle,
+                    shortDesc: MyTexts.contentShort,
+                    context: context,
+                    readCount: "1069"),
+              ],
+            ),
           ),
         ),
       ),

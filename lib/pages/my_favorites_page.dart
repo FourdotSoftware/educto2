@@ -16,18 +16,23 @@ class MyFavoritesPage extends StatefulWidget {
 
 class _MyFavoritesPageState extends State<MyFavoritesPage> {
   bool hasData = false;
+  var scaffoldKey4 = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return myFavoritesPage();
+    return myFavoritesPage(key: scaffoldKey4);
   }
 
-  Scaffold myFavoritesPage() {
-    return Scaffold(
-      bottomNavigationBar: navBar(context),
-      backgroundColor: MyColors.secondary,
-      appBar: appBar(title: MyTexts.favoritesTitle),
-      body: hasData ? contentField() : noContent(),
+  Widget myFavoritesPage({GlobalKey<ScaffoldState>? key}) {
+    return SafeArea(
+      child: Scaffold(
+        key: key,
+        endDrawer: drawer(),
+        bottomNavigationBar: navBar(context),
+        backgroundColor: MyColors.secondary,
+        appBar: appBar(title: MyTexts.favoritesTitle, key: key),
+        body: hasData ? contentField() : noContent(),
+      ),
     );
   }
 
@@ -39,25 +44,30 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
           image: "photo1.jpg",
           title: MyTexts.contentTitle,
           shortDesc: MyTexts.contentShort,
+          context: context,
           readCount: "1069"),
       contentBar(
           image: "photo1.jpg",
+          context: context,
+          title: MyTexts.contentTitle,
+          shortDesc: MyTexts.contentShort,
+          readCount: "1069"),
+      contentBar(
+          image: "photo1.jpg",
+          context: context,
           title: MyTexts.contentTitle,
           shortDesc: MyTexts.contentShort,
           readCount: "1069"),
       contentBar(
           image: "photo1.jpg",
           title: MyTexts.contentTitle,
+          context: context,
           shortDesc: MyTexts.contentShort,
           readCount: "1069"),
       contentBar(
           image: "photo1.jpg",
           title: MyTexts.contentTitle,
-          shortDesc: MyTexts.contentShort,
-          readCount: "1069"),
-      contentBar(
-          image: "photo1.jpg",
-          title: MyTexts.contentTitle,
+          context: context,
           shortDesc: MyTexts.contentShort,
           readCount: "1069")
     ])));

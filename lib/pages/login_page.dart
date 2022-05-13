@@ -21,15 +21,17 @@ class _LoginPageState extends State<LoginPage> {
     return loginPage();
   }
 
-  Scaffold loginPage() {
-    return Scaffold(
-      backgroundColor: MyColors.secondary,
-      body: MyPaddings.pagePadding(
-        child: Stack(
-          children: [
-            loginField(),
-            logo(),
-          ],
+  Widget loginPage() {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: MyColors.secondary,
+        body: MyPaddings.pagePadding(
+          child: Stack(
+            children: [
+              loginField(),
+              logo(),
+            ],
+          ),
         ),
       ),
     );
@@ -71,20 +73,29 @@ Text welcomeTitle({String? data}) => Text(data!, style: MyTextstyles.title1());
 Text welcomeSubTitle({String? data}) =>
     Text(data!, style: MyTextstyles.bodyText1());
 
-TextField mailField({String? hintText, IconData? icon}) => TextField(
-      cursorColor: MyColors.primary,
-      style: MyTextstyles.bodyText1(),
-      decoration: InputDecoration(
-        prefixIcon: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.min,
-          children: [Icon(icon, color: MyColors.tertiary), gradientLine()],
+Widget mailField({String? hintText, IconData? icon}) => Container(
+      height: 50,
+      child: TextField(
+        textAlignVertical: TextAlignVertical.center,
+        scrollPadding: EdgeInsets.all(0),
+        cursorColor: MyColors.primary,
+        style: MyTextstyles.bodyText1(),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(0),
+          prefixIcon: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, color: MyColors.primary),
+              gradientLine(isRead: false)
+            ],
+          ),
+          hintText: hintText,
+          hintStyle: MyTextstyles.bodyText1(),
+          border: MyBorders.border1(),
+          enabledBorder: MyBorders.border1(),
+          focusedBorder: MyBorders.border1(isfocused: true),
         ),
-        hintText: hintText,
-        hintStyle: MyTextstyles.bodyText1(),
-        border: MyBorders.border1(),
-        enabledBorder: MyBorders.border1(),
-        focusedBorder: MyBorders.border1(isfocused: true),
       ),
     );
 
@@ -96,12 +107,13 @@ Row nextButton({String? buttonText, void Function()? onPressed}) =>
           child:
               Text(buttonText!, style: MyTextstyles.bodyText1(isLight: true)),
           style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all(Size(0, 50)),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            padding: MaterialStateProperty.all(EdgeInsets.all(26)),
+            padding: MaterialStateProperty.all(EdgeInsets.all(0)),
             backgroundColor: MaterialStateProperty.all(MyColors.primary),
           ),
         ),

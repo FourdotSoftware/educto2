@@ -16,70 +16,81 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
+  var scaffoldKey2 = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    return categoriesPage();
+    return categoriesPage(key: scaffoldKey2);
   }
 
-  Scaffold categoriesPage() {
-    return Scaffold(
-        bottomNavigationBar: navBar(context),
-        backgroundColor: MyColors.secondary,
-        appBar: appBar(title: MyTexts.categories),
-        body: SingleChildScrollView(
-          child: MyPaddings.pagePadding(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      categoryButton(
-                          title: "Matematik",
-                          icon: Icons.add_box,
-                          isSelected: true),
-                      categoryButton(title: "Matematik", icon: Icons.add_box),
-                      categoryButton(title: "Matematik", icon: Icons.add_box),
-                      categoryButton(title: "Matematik", icon: Icons.add_box),
-                      categoryButton(title: "Matematik", icon: Icons.add_box),
-                      categoryButton(title: "Matematik", icon: Icons.add_box),
-                      categoryButton(title: "Matematik", icon: Icons.add_box),
-                      categoryButton(title: "Matematik", icon: Icons.add_box),
-                      categoryButton(title: "Matematik", icon: Icons.add_box),
-                    ],
+  Widget categoriesPage({GlobalKey<ScaffoldState>? key}) {
+    return SafeArea(
+      child: Scaffold(
+          key: key,
+          endDrawer: drawer(),
+          bottomNavigationBar: navBar(context),
+          backgroundColor: MyColors.secondary,
+          appBar: appBar(title: MyTexts.categories, key: key),
+          body: SingleChildScrollView(
+            child: MyPaddings.pagePadding(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        categoryButton(
+                            title: "Matematik",
+                            icon: Icons.add_box,
+                            isSelected: true),
+                        categoryButton(title: "Matematik", icon: Icons.add_box),
+                        categoryButton(title: "Matematik", icon: Icons.add_box),
+                        categoryButton(title: "Matematik", icon: Icons.add_box),
+                        categoryButton(title: "Matematik", icon: Icons.add_box),
+                        categoryButton(title: "Matematik", icon: Icons.add_box),
+                        categoryButton(title: "Matematik", icon: Icons.add_box),
+                        categoryButton(title: "Matematik", icon: Icons.add_box),
+                        categoryButton(title: "Matematik", icon: Icons.add_box),
+                      ],
+                    ),
                   ),
-                ),
-                myDvider(),
-                contentBar(
-                    image: "photo1.jpg",
-                    readCount: "1069",
-                    title: MyTexts.contentTitle,
-                    shortDesc: MyTexts.contentShort),
-                contentBar(
-                    image: "photo1.jpg",
-                    readCount: "785",
-                    title: MyTexts.contentTitle2,
-                    shortDesc: MyTexts.contentShort),
-                contentBar(
-                    image: "photo1.jpg",
-                    readCount: "1069",
-                    title: MyTexts.contentTitle,
-                    shortDesc: MyTexts.contentShort),
-                contentBar(
-                    image: "photo1.jpg",
-                    readCount: "785",
-                    title: MyTexts.contentTitle2,
-                    shortDesc: MyTexts.contentShort),
-                contentBar(
-                    image: "photo1.jpg",
-                    readCount: "1069",
-                    title: MyTexts.contentTitle,
-                    shortDesc: MyTexts.contentShort),
-              ],
+                  myDvider(),
+                  contentBar(
+                      image: "photo1.jpg",
+                      readCount: "1069",
+                      title: MyTexts.contentTitle,
+                      context: context,
+                      shortDesc: MyTexts.contentShort),
+                  contentBar(
+                      image: "photo1.jpg",
+                      readCount: "785",
+                      title: MyTexts.contentTitle2,
+                      context: context,
+                      shortDesc: MyTexts.contentShort),
+                  contentBar(
+                      image: "photo1.jpg",
+                      readCount: "1069",
+                      context: context,
+                      title: MyTexts.contentTitle,
+                      shortDesc: MyTexts.contentShort),
+                  contentBar(
+                      image: "photo1.jpg",
+                      readCount: "785",
+                      context: context,
+                      title: MyTexts.contentTitle2,
+                      shortDesc: MyTexts.contentShort),
+                  contentBar(
+                      image: "photo1.jpg",
+                      readCount: "1069",
+                      context: context,
+                      title: MyTexts.contentTitle,
+                      shortDesc: MyTexts.contentShort),
+                ],
+              ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 
   Column categoryButton(

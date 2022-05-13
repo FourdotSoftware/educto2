@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:educto2/consts/my_borders.dart';
 import 'package:educto2/consts/my_colors.dart';
 import 'package:educto2/consts/my_paddings.dart';
@@ -12,7 +10,9 @@ import 'package:educto2/pages/interest_page.dart';
 import 'package:educto2/pages/last_edit_page.dart';
 import 'package:educto2/pages/login_page.dart';
 import 'package:educto2/pages/my_favorites_page.dart';
+import 'package:educto2/pages/podcast_page.dart';
 import 'package:educto2/pages/profile_page.dart';
+import 'package:educto2/pages/series_page.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/categories_page.dart';
@@ -33,128 +33,84 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Material App',
-        home: ProfilePage(context));
+        home: PodcastPage());
   }
+}
 
-  SingleChildScrollView drawer() => SingleChildScrollView(
-        child: Drawer(
-          backgroundColor: MyColors.navbar,
-          child: Column(
-            children: [
-              MyPaddings.pagePadding(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      MyTexts.notifications,
-                      style: MyTextstyles.title2(),
-                    ),
-                    Icon(
-                      Icons.close,
-                      color: Colors.white,
-                    )
-                  ],
+Widget drawer() => Drawer(
+      backgroundColor: MyColors.navbar,
+      child: Column(
+        children: [
+          MyPaddings.pagePadding(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  MyTexts.notifications,
+                  style: MyTextstyles.title2(),
                 ),
+                Icon(
+                  Icons.close,
+                  color: Colors.white,
+                )
+              ],
+            ),
+          ),
+          Column(
+            children: [
+              notificationFeild(
+                day: "04",
+                moon: "Ocak",
+                title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
               ),
-              Column(
-                children: [
-                  notificationFeild(
-                    day: "04",
-                    moon: "Ocak",
-                    title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                  ),
-                  notificationFeild(
-                      day: "03",
-                      moon: "Ocak",
-                      title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                      isRead: true),
-                  notificationFeild(
-                    day: "03",
-                    moon: "Ocak",
-                    title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                    isRead: true,
-                  ),
-                  notificationFeild(
-                      day: "01",
-                      moon: "Ocak",
-                      title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                      isRead: true),
-                  notificationFeild(
-                    day: "04",
-                    moon: "Ocak",
-                    title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                  ),
-                  notificationFeild(
-                      day: "03",
-                      moon: "Ocak",
-                      title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                      isRead: true),
-                  notificationFeild(
-                    day: "03",
-                    moon: "Ocak",
-                    title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                    isRead: true,
-                  ),
-                  notificationFeild(
-                      day: "01",
-                      moon: "Ocak",
-                      title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                      isRead: true),
-                  notificationFeild(
-                    day: "04",
-                    moon: "Ocak",
-                    title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                  ),
-                  notificationFeild(
-                      day: "03",
-                      moon: "Ocak",
-                      title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                      isRead: true),
-                  notificationFeild(
-                    day: "03",
-                    moon: "Ocak",
-                    title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                    isRead: true,
-                  ),
-                  notificationFeild(
-                      day: "01",
-                      moon: "Ocak",
-                      title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
-                      isRead: true),
-                ],
+              notificationFeild(
+                  day: "03",
+                  moon: "Ocak",
+                  title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
+                  isRead: true),
+              notificationFeild(
+                day: "03",
+                moon: "Ocak",
+                title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
+                isRead: true,
               ),
+              notificationFeild(
+                  day: "01",
+                  moon: "Ocak",
+                  title: "gfhjhgfgnjhjfgnhgjhgfhdhg",
+                  isRead: true),
             ],
           ),
-        ),
-      );
+        ],
+      ),
+    );
 
-  Widget notificationFeild(
-          {String? day, String? moon, String? title, bool isRead = false}) =>
-      MyPaddings.notificationPadding(
-        child: Row(
-          children: [
-            Column(children: [
-              Text(
-                day!,
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                ),
-              ),
-              Text(moon!, style: MyTextstyles.bodyText2(isLight: true)),
-            ]),
-            MyPaddings.standartPadding(),
-            gradientLine(isRead: isRead),
-            MyPaddings.lowPadding(),
+Widget notificationFeild(
+        {String? day, String? moon, String? title, bool isRead = false}) =>
+    MyPaddings.notificationPadding(
+      child: Row(
+        children: [
+          Column(children: [
             Text(
-              title!,
-              style: MyTextstyles.bodyText1(),
-            )
-          ],
-        ),
-      );
-}
+              day!,
+              style: TextStyle(
+                fontSize: 30,
+                color: Colors.white,
+              ),
+            ),
+            Text(moon!, style: MyTextstyles.bodyText2(isLight: true)),
+          ]),
+          MyPaddings.standartPadding(),
+          gradientLine(isRead: isRead),
+          MyPaddings.lowPadding(),
+          Text(
+            title!,
+            style: MyTextstyles.bodyText1(),
+          )
+        ],
+      ),
+    );
 
 Stack navBar(BuildContext context) {
   return Stack(
@@ -227,7 +183,7 @@ Widget navItem(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: isSelected ? MyColors.primary : Colors.transparent),
-            child: MyPaddings.pagePadding(
+            child: MyPaddings.navbarPadding(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

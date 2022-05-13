@@ -28,92 +28,94 @@ class _InterestPageState extends State<InterestPage> {
     return interest_page();
   }
 
-  Scaffold interest_page() {
-    return Scaffold(
-      backgroundColor: MyColors.secondary,
-      body: MyPaddings.pagePadding(
-        child: Stack(
-          children: [
-            logo(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MyPaddings.standartPadding(
-                    child: welcomeTitle(data: MyTexts.interestTitle)),
-                MyPaddings.standartPadding(
-                    child: welcomeSubTitle(data: MyTexts.interestDesc)),
-                MyPaddings.pagePadding(
-                    child: Wrap(
-                  alignment: WrapAlignment.center,
-                  children: [
-                    interestChip(
-                        title: "Teknoloji",
-                        isSelected: button1Selected,
-                        onPressedd: () {
-                          setState(() {
-                            button1Selected = !button1Selected;
-                          });
+  Widget interest_page() {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: MyColors.secondary,
+        body: MyPaddings.pagePadding(
+          child: Stack(
+            children: [
+              logo(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyPaddings.standartPadding(
+                      child: welcomeTitle(data: MyTexts.interestTitle)),
+                  MyPaddings.standartPadding(
+                      child: welcomeSubTitle(data: MyTexts.interestDesc)),
+                  Wrap(
+                    alignment: WrapAlignment.start,
+                    children: [
+                      interestChip(
+                          title: "Teknoloji",
+                          isSelected: button1Selected,
+                          onPressedd: () {
+                            setState(() {
+                              button1Selected = !button1Selected;
+                            });
+                          }),
+                      interestChip(
+                          title: "Bilim",
+                          isSelected: button2Selected,
+                          onPressedd: () {
+                            setState(() {
+                              button2Selected = !button2Selected;
+                            });
+                          }),
+                      interestChip(
+                          title: "Müzik",
+                          isSelected: button3Selected,
+                          onPressedd: () {
+                            setState(() {
+                              button3Selected = !button3Selected;
+                            });
+                          }),
+                      interestChip(
+                          title: "Spor",
+                          isSelected: button5Selected,
+                          onPressedd: () {
+                            setState(() {
+                              button5Selected = !button5Selected;
+                            });
+                          }),
+                      interestChip(
+                          title: "Coğrafya",
+                          isSelected: button4Selected,
+                          onPressedd: () {
+                            setState(() {
+                              button4Selected = !button4Selected;
+                            });
+                          }),
+                      interestChip(title: "Matematik"),
+                      interestChip(title: "Türkçe"),
+                      interestChip(title: "Resim"),
+                      interestChip(title: "Teknoloji"),
+                      interestChip(title: "Bilim"),
+                      interestChip(title: "Müzik"),
+                      interestChip(title: "Coğrafya"),
+                      interestChip(title: "Spor"),
+                      interestChip(title: "Matematik"),
+                      interestChip(title: "Türkçe"),
+                      interestChip(title: "Resim"),
+                      interestChip(title: "Teknoloji"),
+                    ],
+                  ),
+                  MyPaddings.standartPadding(
+                    child: nextButton(
+                        buttonText: MyTexts.interestButton,
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                              (route) => false);
                         }),
-                    interestChip(
-                        title: "Bilim",
-                        isSelected: button2Selected,
-                        onPressedd: () {
-                          setState(() {
-                            button2Selected = !button2Selected;
-                          });
-                        }),
-                    interestChip(
-                        title: "Müzik",
-                        isSelected: button3Selected,
-                        onPressedd: () {
-                          setState(() {
-                            button3Selected = !button3Selected;
-                          });
-                        }),
-                    interestChip(
-                        title: "Coğrafya",
-                        isSelected: button4Selected,
-                        onPressedd: () {
-                          setState(() {
-                            button4Selected = !button4Selected;
-                          });
-                        }),
-                    interestChip(
-                        title: "Spor",
-                        isSelected: button5Selected,
-                        onPressedd: () {
-                          setState(() {
-                            button5Selected = !button5Selected;
-                          });
-                        }),
-                    interestChip(title: "Matematik"),
-                    interestChip(title: "Türkçe"),
-                    interestChip(title: "Resim"),
-                    interestChip(title: "Teknoloji"),
-                    interestChip(title: "Bilim"),
-                    interestChip(title: "Müzik"),
-                    interestChip(title: "Coğrafya"),
-                    interestChip(title: "Spor"),
-                    interestChip(title: "Matematik"),
-                    interestChip(title: "Türkçe"),
-                    interestChip(title: "Resim"),
-                    interestChip(title: "Teknoloji"),
-                  ],
-                )),
-                MyPaddings.standartPadding(
-                  child: nextButton(
-                      buttonText: MyTexts.interestButton,
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                            (route) => false);
-                      }),
-                ),
-              ],
-            ),
-          ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -126,14 +128,15 @@ Widget interestChip(
         bool isLight = false,
         void Function()? onPressedd}) =>
     Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: EdgeInsets.symmetric(horizontal: 3),
       child: ElevatedButton(
           onPressed: onPressedd,
           child: Text(title,
               style:
                   MyTextstyles.bodyText1(isLight: isLight ? true : isSelected)),
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(EdgeInsets.all(18.0)),
+            minimumSize: MaterialStateProperty.all(Size(78, 33)),
+            padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
             backgroundColor: MaterialStateProperty.all(
                 isSelected ? MyColors.primary : MyColors.secondary),
             shape: MaterialStateProperty.all(

@@ -19,37 +19,39 @@ class _CodePageState extends State<CodePage> {
     return codePage();
   }
 
-  Scaffold codePage() {
-    return Scaffold(
-      backgroundColor: MyColors.secondary,
-      body: MyPaddings.pagePadding(
-        child: Stack(
-          children: [
-            logo(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MyPaddings.standartPadding(
-                    child: welcomeTitle(data: MyTexts.mailTitle)),
-                MyPaddings.standartPadding(
-                    child: welcomeSubTitle(data: MyTexts.mailDesc)),
-                MyPaddings.standartPadding(
-                  child: mailField(
-                      hintText: "Kodu Giriniz", icon: Icons.key_outlined),
-                ),
-                MyPaddings.standartPadding(
-                    child: nextButton(
-                        buttonText: MyTexts.nextButton,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InterestPage()));
-                        }))
-              ],
-            ),
-          ],
+  Widget codePage() {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: MyColors.secondary,
+        body: MyPaddings.pagePadding(
+          child: Stack(
+            children: [
+              logo(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MyPaddings.standartPadding(
+                      child: welcomeTitle(data: MyTexts.mailTitle)),
+                  MyPaddings.standartPadding(
+                      child: welcomeSubTitle(data: MyTexts.mailDesc)),
+                  MyPaddings.standartPadding(
+                    child: mailField(
+                        hintText: "Kodu Giriniz", icon: Icons.key_outlined),
+                  ),
+                  MyPaddings.standartPadding(
+                      child: nextButton(
+                          buttonText: MyTexts.nextButton,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => InterestPage()));
+                          }))
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

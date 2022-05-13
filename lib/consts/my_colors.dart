@@ -10,6 +10,7 @@ class MyColors {
   static const Color blackGradientEnd = Color(0x00545454);
 
   static const Color gradientCenter = Color(0x87303f1b);
+  static const Color gradientSecondary = Color(0x006a6d70);
 
   static const Color contentGradientCenter = Color(0x34434343);
 }
