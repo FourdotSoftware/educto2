@@ -31,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
       SafeArea(
         child: Scaffold(
           key: key,
-          endDrawer: drawer(),
+          endDrawer: drawer(context: context),
           bottomNavigationBar: navBar(context!),
           backgroundColor: MyColors.secondary,
           appBar:

@@ -27,7 +27,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
     return SafeArea(
       child: Scaffold(
           key: key,
-          endDrawer: drawer(),
+          endDrawer: drawer(context: context),
           bottomNavigationBar: navBar(context),
           backgroundColor: MyColors.secondary,
           appBar: appBar(title: MyTexts.categories, key: key, context: context),

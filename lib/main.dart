@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-Widget drawer() => Drawer(
+Widget drawer({BuildContext? context}) => Drawer(
       backgroundColor: MyColors.navbar,
       child: Column(
         children: [
@@ -50,9 +50,14 @@ Widget drawer() => Drawer(
                   MyTexts.notifications,
                   style: MyTextstyles.title2(),
                 ),
-                Icon(
-                  Icons.close,
-                  color: Colors.white,
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context!);
+                  },
+                  child: Icon(
+                    Icons.close,
+                    color: Colors.white,
+                  ),
                 )
               ],
             ),

@@ -29,7 +29,7 @@ class _PodcastPageState extends State<PodcastPage> {
     return SafeArea(
       child: Scaffold(
         key: key,
-        endDrawer: drawer(),
+        endDrawer: drawer(context: context),
         backgroundColor: MyColors.secondary,
         bottomNavigationBar: navBar(context!),
         body: Stack(

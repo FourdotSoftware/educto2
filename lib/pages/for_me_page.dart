@@ -27,7 +27,7 @@ class _ForMePageState extends State<ForMePage> {
     return SafeArea(
       child: Scaffold(
         key: key,
-        endDrawer: drawer(),
+        endDrawer: drawer(context: context),
         backgroundColor: MyColors.secondary,
         appBar: appBar(title: MyTexts.forMe, key: key, context: context),
         body: MyPaddings.pagePadding(

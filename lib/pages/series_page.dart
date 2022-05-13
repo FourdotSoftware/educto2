@@ -27,7 +27,7 @@ class _SeriesPageState extends State<SeriesPage> {
     return SafeArea(
       child: Scaffold(
         key: key,
-        endDrawer: drawer(),
+        endDrawer: drawer(context: context),
         backgroundColor: MyColors.secondary,
         bottomNavigationBar: navBar(context!),
         body: CustomScrollView(

@@ -27,7 +27,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
     return SafeArea(
       child: Scaffold(
         key: key,
-        endDrawer: drawer(),
+        endDrawer: drawer(context: context),
         bottomNavigationBar: navBar(context),
         backgroundColor: MyColors.secondary,
         appBar:

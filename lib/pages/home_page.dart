@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
           key: key,
-          endDrawer: drawer(),
+          endDrawer: drawer(context: context),
           bottomNavigationBar: navBar(context),
           backgroundColor: MyColors.secondary,
           appBar: appBar(

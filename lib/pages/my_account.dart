@@ -30,7 +30,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
     return SafeArea(
       child: Scaffold(
         key: key,
-        endDrawer: drawer(),
+        endDrawer: drawer(context: context),
         bottomNavigationBar: navBar(context),
         backgroundColor: MyColors.navbar,
         appBar: appBar(title: MyTexts.myAccount, key: key, context: context),
