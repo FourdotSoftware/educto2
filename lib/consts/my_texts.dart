@@ -51,5 +51,6 @@ class MyTexts {
   static String podCasts = "Podcastler";
   static String articleSerieTitle2 = "Ahtapot Podcast";
   static String articleSerieTitle3 = "Ahtapot Yayımcı Anlatıyor";
-  static String articleSerieTitle4 = "MetaOkul ve Eğitim ";
+  static String articleSerieTitle4 = "MetaOkul ve Eğitim Anlayışı";
+  static String articleSerieTitle = "Eğitimde Oyunlaştırma Yazı Dizisi";
 }

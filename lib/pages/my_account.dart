@@ -33,7 +33,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
         endDrawer: drawer(),
         bottomNavigationBar: navBar(context),
         backgroundColor: MyColors.navbar,
-        appBar: appBar(title: MyTexts.myAccount, key: key),
+        appBar: appBar(title: MyTexts.myAccount, key: key, context: context),
         body: SingleChildScrollView(
           child: Column(
             children: [

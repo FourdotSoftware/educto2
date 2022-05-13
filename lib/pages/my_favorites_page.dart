@@ -30,7 +30,8 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
         endDrawer: drawer(),
         bottomNavigationBar: navBar(context),
         backgroundColor: MyColors.secondary,
-        appBar: appBar(title: MyTexts.favoritesTitle, key: key),
+        appBar:
+            appBar(title: MyTexts.favoritesTitle, key: key, context: context),
         body: hasData ? contentField() : noContent(),
       ),
     );

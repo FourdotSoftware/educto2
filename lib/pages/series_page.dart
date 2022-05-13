@@ -27,70 +27,76 @@ class _SeriesPageState extends State<SeriesPage> {
     return SafeArea(
       child: Scaffold(
         key: key,
-        // endDrawer: drawer(),
+        endDrawer: drawer(),
         backgroundColor: MyColors.secondary,
         bottomNavigationBar: navBar(context!),
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              title: const Text(""),
-              // actions: [notificationButton(scaffoldKey: key)],
-              backgroundColor: Colors.transparent,
-              expandedHeight: 300,
-              flexibleSpace: Container(
-                height: 300,
-                width: 500,
-                child: Stack(
-                  children: [
-                    Image.asset("assets/images/photo1.jpg",
-                        height: 300, width: 500, fit: BoxFit.cover),
-                    Container(
-                      height: 300,
-                      width: 500,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            colors: [
-                              MyColors.secondary,
-                              // MyColors.gradientSecondary
-                              MyColors.blackGradientEnd
-                            ]),
+                leading: backButton(context: context),
+                automaticallyImplyLeading: true,
+                title: const Text(""),
+                actions: [notificationButton(key: key)],
+                backgroundColor: Colors.transparent,
+                expandedHeight: 300,
+                flexibleSpace: FlexibleSpaceBar(
+                  titlePadding: EdgeInsets.all(0),
+                  expandedTitleScale: 1,
+                  title: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      MyPaddings.notificationPadding(
+                        child: Row(
+                          children: [
+                            Text(
+                              MyTexts.articleSerieTitle,
+                              style: MyTextstyles.title2(),
+                            ),
+                            MyPaddings.pagePaddingSymmetric4(
+                                child: Icon(Icons.share, color: Colors.white))
+                          ],
+                        ),
                       ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      MyPaddings.pagePaddingSymmetric(
+                        child: Row(
+                          children: [
+                            const Icon(Icons.account_box,
+                                color: MyColors.tertiary),
+                            MyPaddings.lowPadding(
+                                child: Text(
+                              "Doç.Dr.Yavuz SAMUR",
+                              style: MyTextstyles.bodyText1(),
+                            ))
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  background: Container(
+                    height: 300,
+                    width: 500,
+                    child: Stack(
                       children: [
-                        MyPaddings.notificationPadding(
-                          child: Row(
-                            children: [
-                              Text(
-                                "MyTexts.articleSerieTitle,",
-                                style: MyTextstyles.title2(),
-                              ),
-                              const Icon(Icons.share, color: Colors.white)
-                            ],
+                        Image.asset("assets/images/photo1.jpg",
+                            height: 300, width: 500, fit: BoxFit.cover),
+                        Container(
+                          height: 300,
+                          width: 500,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  MyColors.secondary,
+                                  MyColors.gradientSecondary
+                                  // MyColors.blackGradientEnd
+                                ]),
                           ),
                         ),
-                        MyPaddings.pagePaddingSymmetric(
-                          child: Row(
-                            children: [
-                              const Icon(Icons.account_box,
-                                  color: MyColors.tertiary),
-                              MyPaddings.lowPadding(
-                                  child: Text(
-                                "Doç.Dr.Yavuz SAMUR",
-                                style: MyTextstyles.bodyText1(),
-                              ))
-                            ],
-                          ),
-                        )
                       ],
-                    )
-                  ],
-                ),
-              ),
-            ),
+                    ),
+                  ),
+                )),
             SliverFillRemaining(
               child: MyPaddings.pagePaddingSymmetric(
                 child: Column(
@@ -103,21 +109,29 @@ class _SeriesPageState extends State<SeriesPage> {
                     ),
                     MyPaddings.standartPadding(),
                     articleField(
+                        context: context,
+                        page: ContentPage(),
                         title: "Oyunlaştırma Nedir?",
                         titleDesc: MyTexts.contentShort,
                         image: "photo1.jpg",
                         no: "1"),
                     articleField(
+                        context: context,
+                        page: ContentPage(),
                         title: "Oyunlaştırma Nedir?",
                         titleDesc: MyTexts.contentShort,
                         image: "photo1.jpg",
                         no: "1"),
                     articleField(
+                        context: context,
+                        page: ContentPage(),
                         title: "Oyunlaştırma Nedir?",
                         titleDesc: MyTexts.contentShort,
                         image: "photo1.jpg",
                         no: "1"),
                     articleField(
+                        context: context,
+                        page: ContentPage(),
                         title: "Oyunlaştırma Nedir?",
                         titleDesc: MyTexts.contentShort,
                         image: "photo1.jpg",
@@ -134,39 +148,49 @@ class _SeriesPageState extends State<SeriesPage> {
 }
 
 Widget articleField(
-    {String? title, String? titleDesc, String? image, String? no}) {
-  return MyPaddings.spacePadding(
-    child: Row(
-      children: [
-        // profileContentPhoto(
-        //     image: image,
-        //     isMini: true,
-        //     child: Text(
-        //       no!,
-        //       style: MyTextstyles.title(),
-        //     )),
-        MyPaddings.standartPadding(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title!,
-                style: MyTextstyles.title2(),
-              ),
-              Row(
-                children: [
-                  gradientLine(isRead: false),
-                  MyPaddings.lowPadding(),
-                  Text(
-                    titleDesc!,
-                    style: MyTextstyles.bodyText2(),
-                  )
-                ],
-              )
-            ],
-          ),
-        )
-      ],
+    {String? title,
+    String? titleDesc,
+    String? image,
+    String? no,
+    BuildContext? context,
+    Widget? page}) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(context!, MaterialPageRoute(builder: (context) => page!));
+    },
+    child: MyPaddings.spacePadding(
+      child: Row(
+        children: [
+          profileContentPhoto(
+              image: image,
+              isMini: true,
+              child: Text(
+                no!,
+                style: MyTextstyles.title(),
+              )),
+          MyPaddings.standartPadding(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title!,
+                  style: MyTextstyles.title3(),
+                ),
+                Row(
+                  children: [
+                    gradientLine(isRead: false),
+                    MyPaddings.lowPadding(),
+                    Text(
+                      titleDesc!,
+                      style: MyTextstyles.bodyText2(),
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     ),
   );
 }

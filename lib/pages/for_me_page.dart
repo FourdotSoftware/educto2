@@ -29,7 +29,7 @@ class _ForMePageState extends State<ForMePage> {
         key: key,
         endDrawer: drawer(),
         backgroundColor: MyColors.secondary,
-        appBar: appBar(title: MyTexts.forMe, key: key),
+        appBar: appBar(title: MyTexts.forMe, key: key, context: context),
         body: MyPaddings.pagePadding(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -28,7 +28,11 @@ class _LastEditPageState extends State<LastEditPage> {
         endDrawer: drawer(),
         bottomNavigationBar: navBar(context),
         backgroundColor: MyColors.secondary,
-        appBar: appBar(title: MyTexts.lastEditTitle, isSlogan: false, key: key),
+        appBar: appBar(
+            title: MyTexts.lastEditTitle,
+            isSlogan: false,
+            key: key,
+            context: context),
         body: SingleChildScrollView(
           child: MyPaddings.pagePaddingSymmetric(
             child: Column(

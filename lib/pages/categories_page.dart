@@ -30,7 +30,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
           endDrawer: drawer(),
           bottomNavigationBar: navBar(context),
           backgroundColor: MyColors.secondary,
-          appBar: appBar(title: MyTexts.categories, key: key),
+          appBar: appBar(title: MyTexts.categories, key: key, context: context),
           body: SingleChildScrollView(
             child: MyPaddings.pagePadding(
               child: Column(

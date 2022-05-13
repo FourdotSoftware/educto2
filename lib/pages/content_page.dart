@@ -33,6 +33,7 @@ class _ContentPageState extends State<ContentPage> {
         backgroundColor: MyColors.secondary,
         body: CustomScrollView(slivers: [
           SliverAppBar(
+              leading: backButton(context: context),
               pinned: true,
               actions: [notificationButton(key: key)],
               title: Text(""),
@@ -168,3 +169,13 @@ Container gradientLine({bool isRead = false}) => Container(
       ),
     );
 SizedBox logoMini() => SizedBox(child: logo(), height: 14, width: 14);
+
+Widget backButton({required BuildContext? context, bool isShow = true}) {
+  return isShow
+      ? InkWell(
+          onTap: () {
+            Navigator.pop(context!);
+          },
+          child: Icon(Icons.arrow_back_ios))
+      : Container();
+}

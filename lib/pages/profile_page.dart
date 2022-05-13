@@ -34,7 +34,8 @@ class _ProfilePageState extends State<ProfilePage> {
           endDrawer: drawer(),
           bottomNavigationBar: navBar(context!),
           backgroundColor: MyColors.secondary,
-          appBar: appBar(title: MyTexts.autherProfile, key: key),
+          appBar:
+              appBar(title: MyTexts.autherProfile, key: key, context: context),
           body: SingleChildScrollView(
             child: Stack(
               alignment: Alignment.topCenter,

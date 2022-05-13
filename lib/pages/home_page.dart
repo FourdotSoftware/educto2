@@ -29,8 +29,12 @@ class _HomePageState extends State<HomePage> {
           endDrawer: drawer(),
           bottomNavigationBar: navBar(context),
           backgroundColor: MyColors.secondary,
-          appBar:
-              appBar(title: MyTexts.appName, isSlogan: true, key: scaffoldKey1),
+          appBar: appBar(
+              isShowBackButton: false,
+              title: MyTexts.appName,
+              isSlogan: true,
+              key: key,
+              context: context),
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -230,9 +234,12 @@ class _HomePageState extends State<HomePage> {
 AppBar appBar(
         {String? title,
         bool isSlogan = false,
+        BuildContext? context,
         Color color = MyColors.secondary,
-        GlobalKey<ScaffoldState>? key}) =>
+        GlobalKey<ScaffoldState>? key,
+        bool isShowBackButton = true}) =>
     AppBar(
+      leading: backButton(context: context, isShow: isShowBackButton),
       elevation: 0,
       backgroundColor: color,
       title: Row(

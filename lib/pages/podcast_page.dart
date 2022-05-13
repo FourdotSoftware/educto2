@@ -38,6 +38,7 @@ class _PodcastPageState extends State<PodcastPage> {
             CustomScrollView(
               slivers: [
                 SliverAppBar(
+                    leading: backButton(context: context),
                     collapsedHeight: 68,
                     elevation: 0,
                     pinned: true,
@@ -140,22 +141,23 @@ class _PodcastPageState extends State<PodcastPage> {
                 decoration: BoxDecoration(
                     color: MyColors.navbar,
                     borderRadius: BorderRadius.circular(8)),
-                child: MyPaddings.standartPadding(
-                    //stmetric4
-                    child: Row(
-                  children: [
-                    profileContentPhoto(
-                        image: "photo1.jpg",
-                        isMini: true,
-                        child: podCastIcon()),
-                    contentColumn(
-                        title1: MyTexts.articleSerieTitle3,
-                        title2: "Ahtapot Yayımcı Anlatıyor",
-                        isPlaying: true,
-                        time: "23:12",
-                        value: 0)
-                  ],
-                )),
+                //stmetric4
+                child: MyPaddings.pagePaddingSymmetric4(
+                  child: Row(
+                    children: [
+                      profileContentPhoto(
+                          image: "photo1.jpg",
+                          isMini: true,
+                          child: podCastIcon()),
+                      contentColumn(
+                          title1: MyTexts.articleSerieTitle3,
+                          title2: "Ahtapot Yayımcı Anlatıyor",
+                          isPlaying: true,
+                          time: "23:12",
+                          value: 0)
+                    ],
+                  ),
+                ),
               ),
             )
           ],
@@ -206,6 +208,7 @@ class _PodcastPageState extends State<PodcastPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            MyPaddings.lowPadding(),
             MyPaddings.lowPadding(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,7 +217,7 @@ class _PodcastPageState extends State<PodcastPage> {
                 children: [
                   Text(
                     title1!,
-                    style: MyTextstyles.title2(),
+                    style: MyTextstyles.title3(),
                   ),
                   Icon(
                     isPlaying ? Icons.pause_circle : Icons.play_circle,
@@ -223,14 +226,14 @@ class _PodcastPageState extends State<PodcastPage> {
                 ],
               ),
             ),
-            MyPaddings.lowPadding(
+            MyPaddings.pagePaddingSymmetric4(
               child: Row(
                 children: [
                   logoMini(),
                   MyPaddings.pagePaddingSymmetric3(
                     child: Text(
                       title2!,
-                      style: MyTextstyles.bodyText2(),
+                      style: MyTextstyles.info(isMini: true, isLight: false),
                     ),
                   )
                 ],
