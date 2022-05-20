@@ -1,5 +1,5 @@
-import 'package:educto2/pages/code_page.dart';
-import 'package:educto2/pages/content_page.dart';
+import 'code_page.dart';
+import 'content_page.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/my_borders.dart';
@@ -86,7 +86,7 @@ Widget mailField({String? hintText, IconData? icon}) => Container(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, color: MyColors.primary),
+              Icon(icon, color: MyColors.tertiary),
               gradientLine(isRead: false)
             ],
           ),

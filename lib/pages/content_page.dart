@@ -1,5 +1,8 @@
-import 'package:educto2/main.dart';
-import 'package:educto2/pages/login_page.dart';
+import 'package:educto2/models/content_model.dart';
+import 'package:educto2/widgets/my_drawer.dart';
+
+import '../main.dart';
+import 'login_page.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/my_colors.dart';
@@ -9,7 +12,11 @@ import '../consts/my_textstyles.dart';
 import 'home_page.dart';
 
 class ContentPage extends StatefulWidget {
-  const ContentPage({Key? key}) : super(key: key);
+  const ContentPage({
+    Key? key,
+    required this.content,
+  }) : super(key: key);
+  final ContentModel content;
 
   @override
   State<ContentPage> createState() => _ContentPageState();
@@ -17,7 +24,6 @@ class ContentPage extends StatefulWidget {
 
 class _ContentPageState extends State<ContentPage> {
   var scaffoldKey6 = GlobalKey<ScaffoldState>();
-  bool isLiked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,7 @@ class _ContentPageState extends State<ContentPage> {
     return SafeArea(
       child: Scaffold(
         key: key,
-        endDrawer: drawer(context: context),
+        endDrawer: MyDrawer(),
         bottomNavigationBar: navBar(context),
         backgroundColor: MyColors.secondary,
         body: CustomScrollView(slivers: [
@@ -36,19 +42,19 @@ class _ContentPageState extends State<ContentPage> {
               leading: backButton(context: context),
               pinned: true,
               actions: [notificationButton(key: key)],
-              title: Text(""),
+              title: const Text(""),
               backgroundColor: MyColors.secondary,
               //pinned: true,
               expandedHeight: 300,
               flexibleSpace: FlexibleSpaceBar(
                 expandedTitleScale: 1,
-                background: Container(
+                background: SizedBox(
                   height: 300,
                   width: 500,
                   child: Stack(
                     children: [
                       Image.asset(
-                        "assets/images/photo1.jpg",
+                        "assets/images/${widget.content.detailPhoto}",
                         width: 500,
                         height: 300,
                         fit: BoxFit.cover,
@@ -56,7 +62,7 @@ class _ContentPageState extends State<ContentPage> {
                       Container(
                         height: 300,
                         width: 500,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           gradient: LinearGradient(
                               begin: Alignment.bottomCenter,
                               end: Alignment.topCenter,
@@ -76,14 +82,14 @@ class _ContentPageState extends State<ContentPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             MyPaddings.lowPadding(
-                              child: Icon(
+                              child: const Icon(
                                 Icons.visibility_outlined,
                                 color: Colors.white,
                                 size: 12,
                               ),
                             ),
                             Text(
-                              "1069",
+                              widget.content.viewCount.toString(),
                               style: MyTextstyles.info(isMini: true),
                             ),
                           ],
@@ -99,11 +105,11 @@ class _ContentPageState extends State<ContentPage> {
                                   child: gradientLine(),
                                 ),
                                 Text(
-                                  MyTexts.contentTitle,
+                                  widget.content.title!,
                                   style: MyTextstyles.title3(),
                                 ),
                                 MyPaddings.pagePaddingSymmetric3(),
-                                Icon(
+                                const Icon(
                                   Icons.share,
                                   color: Colors.white,
                                 ),
@@ -112,11 +118,12 @@ class _ContentPageState extends State<ContentPage> {
                             InkWell(
                               onTap: () {
                                 setState(() {
-                                  isLiked = !isLiked;
+                                  widget.content.isLiked !=
+                                      !widget.content.isLiked!;
                                 });
                               },
                               child: Icon(
-                                isLiked
+                                widget.content.isLiked!
                                     ? Icons.favorite
                                     : Icons.favorite_border,
                                 color: MyColors.primary,
@@ -133,14 +140,14 @@ class _ContentPageState extends State<ContentPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    MyTexts.text,
+                    widget.content.content!,
                     style: MyTextstyles.bodyText1(),
                   ),
                   MyPaddings.standartPadding(),
                   Row(children: [
                     MyPaddings.lowPadding(child: logoMini()),
                     Text(
-                      MyTexts.publisher,
+                      widget.content.publisherName ?? "fxc",
                       style: MyTextstyles.info(
                         isLight: false,
                       ),
@@ -176,6 +183,6 @@ Widget backButton({required BuildContext? context, bool isShow = true}) {
           onTap: () {
             Navigator.pop(context!);
           },
-          child: Icon(Icons.arrow_back_ios))
+          child: const Icon(Icons.arrow_back_ios))
       : Container();
 }

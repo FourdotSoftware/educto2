@@ -1,4 +1,8 @@
-import 'package:educto2/pages/profile_page.dart';
+import 'package:educto2/models/content_model.dart';
+import 'package:educto2/models/content_serie_model.dart';
+import 'package:educto2/widgets/my_drawer.dart';
+
+import 'profile_page.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/my_colors.dart';
@@ -10,7 +14,8 @@ import 'content_page.dart';
 import 'home_page.dart';
 
 class SeriesPage extends StatefulWidget {
-  const SeriesPage({Key? key}) : super(key: key);
+  const SeriesPage({Key? key, required this.data}) : super(key: key);
+  final ContentSerieModel data;
 
   @override
   State<SeriesPage> createState() => _SeriesPageState();
@@ -27,7 +32,7 @@ class _SeriesPageState extends State<SeriesPage> {
     return SafeArea(
       child: Scaffold(
         key: key,
-        endDrawer: drawer(context: context),
+        endDrawer: MyDrawer(),
         backgroundColor: MyColors.secondary,
         bottomNavigationBar: navBar(context!),
         body: CustomScrollView(
@@ -49,7 +54,7 @@ class _SeriesPageState extends State<SeriesPage> {
                         child: Row(
                           children: [
                             Text(
-                              MyTexts.articleSerieTitle,
+                              widget.data.title!,
                               style: MyTextstyles.title2(),
                             ),
                             MyPaddings.pagePaddingSymmetric4(
@@ -60,11 +65,11 @@ class _SeriesPageState extends State<SeriesPage> {
                       MyPaddings.pagePaddingSymmetric(
                         child: Row(
                           children: [
-                            const Icon(Icons.account_box,
+                            Icon(widget.data.publisherIcon,
                                 color: MyColors.tertiary),
                             MyPaddings.lowPadding(
                                 child: Text(
-                              "Doç.Dr.Yavuz SAMUR",
+                              widget.data.publisherName!,
                               style: MyTextstyles.bodyText1(),
                             ))
                           ],
@@ -77,7 +82,7 @@ class _SeriesPageState extends State<SeriesPage> {
                     width: 500,
                     child: Stack(
                       children: [
-                        Image.asset("assets/images/photo1.jpg",
+                        Image.asset("assets/images/${widget.data.coverPhoto} ",
                             height: 300, width: 500, fit: BoxFit.cover),
                         Container(
                           height: 300,
@@ -103,39 +108,25 @@ class _SeriesPageState extends State<SeriesPage> {
                   children: [
                     MyPaddings.lowPadding(
                       child: Text(
-                        MyTexts.welcomeDesc,
+                        widget.data.desc!,
                         style: MyTextstyles.bodyText1(),
                       ),
                     ),
                     MyPaddings.standartPadding(),
-                    articleField(
-                        context: context,
-                        page: ContentPage(),
-                        title: "Oyunlaştırma Nedir?",
-                        titleDesc: MyTexts.contentShort,
-                        image: "photo1.jpg",
-                        no: "1"),
-                    articleField(
-                        context: context,
-                        page: ContentPage(),
-                        title: "Oyunlaştırma Nedir?",
-                        titleDesc: MyTexts.contentShort,
-                        image: "photo1.jpg",
-                        no: "1"),
-                    articleField(
-                        context: context,
-                        page: ContentPage(),
-                        title: "Oyunlaştırma Nedir?",
-                        titleDesc: MyTexts.contentShort,
-                        image: "photo1.jpg",
-                        no: "1"),
-                    articleField(
-                        context: context,
-                        page: ContentPage(),
-                        title: "Oyunlaştırma Nedir?",
-                        titleDesc: MyTexts.contentShort,
-                        image: "photo1.jpg",
-                        no: "1")
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: widget.data.contents!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return articleField(
+                                context: context,
+                                page: ContentPage(
+                                    content: widget.data.contents![index]),
+                                title: widget.data.contents![index].title,
+                                titleDesc: widget.data.contents![index].content,
+                                image: widget.data.contents![index].coverPhoto,
+                                no: (index + 1).toString());
+                          }),
+                    )
                   ],
                 ),
               ),

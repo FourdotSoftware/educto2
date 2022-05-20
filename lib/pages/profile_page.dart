@@ -1,6 +1,11 @@
-import 'package:educto2/pages/login_page.dart';
-import 'package:educto2/pages/podcast_page.dart';
-import 'package:educto2/pages/series_page.dart';
+import 'package:educto2/models/user_model.dart';
+import 'package:educto2/widgets/my_drawer.dart';
+
+import '../models/content_model.dart';
+import '../models/content_serie_model.dart';
+import 'login_page.dart';
+import 'podcast_page.dart';
+import 'series_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,7 +18,8 @@ import 'content_page.dart';
 import 'home_page.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage(BuildContext context, {Key? key}) : super(key: key);
+  ProfilePage({Key? key, required this.user}) : super(key: key);
+  UserModel user;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -29,160 +35,133 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget profilePage({BuildContext? context, GlobalKey<ScaffoldState>? key}) =>
       SafeArea(
-        child: Scaffold(
-          key: key,
-          endDrawer: drawer(context: context),
-          bottomNavigationBar: navBar(context!),
-          backgroundColor: MyColors.secondary,
-          appBar:
-              appBar(title: MyTexts.autherProfile, key: key, context: context),
-          body: SingleChildScrollView(
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                Container(
-                    height: 130,
-                    width: 500,
-                    child: Image.asset(
-                      "assets/images/photo1.jpg",
-                      height: 500,
-                      width: 130,
-                      fit: BoxFit.cover,
-                    )),
-                Padding(
-                  padding: const EdgeInsets.only(top: 65),
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: MyColors.secondary,
-                        radius: 65,
-                        child: CircleAvatar(
-                            child: logo(),
-                            backgroundColor: MyColors.navbar,
-                            radius: 58),
-                      ),
-                      Text(
-                        MyTexts.name,
-                        textAlign: TextAlign.center,
-                        style: MyTextstyles.title1(),
-                      ),
-                      Text(MyTexts.mail,
+          child: Scaffold(
+              key: key,
+              endDrawer: MyDrawer(),
+              bottomNavigationBar: navBar(context!),
+              backgroundColor: MyColors.secondary,
+              appBar: appBar(
+                  title: MyTexts.autherProfile, key: key, context: context),
+              body: SingleChildScrollView(
+                child: Stack(alignment: Alignment.topCenter, children: [
+                  Container(
+                      height: 130,
+                      width: 500,
+                      child: Image.asset(
+                        "assets/images/${widget.user.coverPhoto}",
+                        height: 500,
+                        width: 130,
+                        fit: BoxFit.cover,
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 65),
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: MyColors.secondary,
+                          radius: 65,
+                          child: CircleAvatar(
+                              child: logo(),
+                              backgroundColor: MyColors.navbar,
+                              radius: 58),
+                        ),
+                        Text(
+                          widget.user.publisherName ?? "",
                           textAlign: TextAlign.center,
-                          style: MyTextstyles.bodyText1()),
-                      MyPaddings.pagePadding(
-                        child: Text(MyTexts.loremIpsum,
+                          style: MyTextstyles.title1(),
+                        ),
+                        Text(widget.user.publisherMail!,
+                            textAlign: TextAlign.center,
                             style: MyTextstyles.bodyText1()),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          profileInfo(title: "Takipçi", count: "129"),
-                          MyPaddings.pagePaddingSymmetric2(
-                              child: gradientLine(isRead: false)),
-                          profileInfo(title: "Okunma", count: "1259"),
-                          MyPaddings.pagePaddingSymmetric2(
-                              child: gradientLine(isRead: false)),
-                          profileInfo(title: "İçerik", count: "34")
-                        ],
-                      ),
-                      MyPaddings.pagePaddingSymmetric(
-                        child: Row(
+                        MyPaddings.pagePadding(
+                          child: Text(widget.user.bio!,
+                              style: MyTextstyles.bodyText1()),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              MyTexts.articles,
-                              style: MyTextstyles.title2(),
-                            ),
+                            profileInfo(
+                                title: "Takipçi",
+                                count: widget.user.followerCount),
+                            MyPaddings.pagePaddingSymmetric2(
+                                child: gradientLine(isRead: false)),
+                            profileInfo(
+                                title: "Okunma", count: widget.user.readcount),
+                            MyPaddings.pagePaddingSymmetric2(
+                                child: gradientLine(isRead: false)),
+                            profileInfo(
+                                title: "İçerik",
+                                count: widget.user.contentCount)
                           ],
                         ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: MyPaddings.notificationPadding(
+                        MyPaddings.pagePaddingSymmetric(
                           child: Row(
                             children: [
-                              profileContent(
-                                  context: context,
-                                  page: SeriesPage(),
-                                  image: "photo1.jpg",
-                                  title: MyTexts.contentTitle3,
-                                  child:
-                                      Text("12", style: MyTextstyles.title())),
-                              profileContent(
-                                  context: context,
-                                  page: SeriesPage(),
-                                  image: "photo1.jpg",
-                                  title: MyTexts.contentTitle3,
-                                  child:
-                                      Text("12", style: MyTextstyles.title())),
-                              profileContent(
-                                  context: context,
-                                  page: SeriesPage(),
-                                  image: "photo1.jpg",
-                                  title: MyTexts.contentTitle3,
-                                  child:
-                                      Text("8", style: MyTextstyles.title())),
-                              profileContent(
-                                  context: context,
-                                  page: SeriesPage(),
-                                  image: "photo1.jpg",
-                                  title: MyTexts.contentTitle3,
-                                  child:
-                                      Text("12", style: MyTextstyles.title()))
+                              Text(
+                                MyTexts.articles,
+                                style: MyTextstyles.title2(),
+                              ),
                             ],
                           ),
                         ),
-                      ),
-                      MyPaddings.pagePaddingSymmetric(
-                        child: Row(
-                          children: [
-                            Text(
-                              MyTexts.podCasts,
-                              style: MyTextstyles.title2(),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: MyPaddings.notificationPadding(
+                        MyPaddings.notificationPadding(
+                            child: Container(
+                          height: 150,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: widget.user.contentSeries!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return profileContent(
+                                    context: context,
+                                    page: SeriesPage(
+                                      data: widget.user.contentSeries![index],
+                                    ), //TODO
+                                    image: widget
+                                        .user.contentSeries![index].coverPhoto,
+                                    title:
+                                        widget.user.contentSeries![index].title,
+                                    child: Text(
+                                        widget.user.contentSeries![index]
+                                            .contents!.length
+                                            .toString(),
+                                        style: MyTextstyles.title()));
+                              }),
+                        )),
+                        MyPaddings.pagePaddingSymmetric(
                           child: Row(
                             children: [
-                              profileContent(
-                                  context: context,
-                                  page: PodcastPage(),
-                                  title: MyTexts.contentTitle3,
-                                  image: "photo1.jpg",
-                                  child: podCastIcon()),
-                              profileContent(
-                                  context: context,
-                                  page: PodcastPage(),
-                                  image: "photo1.jpg",
-                                  title: MyTexts.contentTitle3,
-                                  child: podCastIcon()),
-                              profileContent(
-                                  context: context,
-                                  page: PodcastPage(),
-                                  image: "photo1.jpg",
-                                  title: MyTexts.contentTitle3,
-                                  child: podCastIcon()),
-                              profileContent(
-                                  context: context,
-                                  page: PodcastPage(),
-                                  image: "photo1.jpg",
-                                  title: MyTexts.contentTitle3,
-                                  child: podCastIcon())
+                              Text(
+                                MyTexts.podCasts,
+                                style: MyTextstyles.title2(),
+                              ),
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          height: 180,
+                          child: MyPaddings.notificationPadding(
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 0,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return profileContent(
+                                      context: context,
+                                      page: PodcastPage(
+                                          podcastSerie: widget.user
+                                              .podcastSeries![index]), //TODO
+                                      title: widget
+                                          .user.podcastSeries![index].title,
+                                      image: widget.user.podcastSeries![index]
+                                          .coverPhoto,
+                                      child: podCastIcon());
+                                }),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
+                ]),
+              )));
 
   Widget profileContent(
           {String? title,
@@ -201,10 +180,15 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               profileContentPhoto(image: image, isMini: isMini, child: child),
               MyPaddings.lowPadding(),
-              Text(
-                title!,
-                style: MyTextstyles.bodyText2(isLight: true, isBold: true),
-                textAlign: TextAlign.center,
+              Container(
+                width: 96,
+                child: Text(
+                  title!,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: MyTextstyles.bodyText2(isLight: true, isBold: true),
+                  textAlign: TextAlign.center,
+                ),
               )
             ],
           ),

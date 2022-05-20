@@ -1,4 +1,8 @@
-import 'package:educto2/pages/profile_page.dart';
+import 'package:educto2/models/podcast_model.dart';
+import 'package:educto2/widgets/my_drawer.dart';
+
+import '../models/podcast_serie_model.dart';
+import 'profile_page.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/my_colors.dart';
@@ -10,7 +14,8 @@ import 'content_page.dart';
 import 'home_page.dart';
 
 class PodcastPage extends StatefulWidget {
-  const PodcastPage({Key? key}) : super(key: key);
+  PodcastPage({Key? key, required this.podcastSerie}) : super(key: key);
+  final PodcastSerieModel podcastSerie;
 
   @override
   State<PodcastPage> createState() => _PodcastPageState();
@@ -29,7 +34,7 @@ class _PodcastPageState extends State<PodcastPage> {
     return SafeArea(
       child: Scaffold(
         key: key,
-        endDrawer: drawer(context: context),
+        endDrawer: MyDrawer(),
         backgroundColor: MyColors.secondary,
         bottomNavigationBar: navBar(context!),
         body: Stack(
@@ -38,6 +43,8 @@ class _PodcastPageState extends State<PodcastPage> {
             CustomScrollView(
               slivers: [
                 SliverAppBar(
+                    centerTitle: false,
+                    titleSpacing: 0,
                     leading: backButton(context: context),
                     collapsedHeight: 68,
                     elevation: 0,
@@ -54,7 +61,7 @@ class _PodcastPageState extends State<PodcastPage> {
                             child: Row(
                               children: [
                                 Text(
-                                  MyTexts.articleSerieTitle2,
+                                  widget.podcastSerie.title!,
                                   style: MyTextstyles.title2(),
                                 ),
                                 MyPaddings.lowPadding(
@@ -66,11 +73,11 @@ class _PodcastPageState extends State<PodcastPage> {
                           MyPaddings.pagePaddingSymmetric(
                             child: Row(
                               children: [
-                                const Icon(Icons.account_box,
+                                Icon(widget.podcastSerie.publisherIcon,
                                     color: MyColors.tertiary),
                                 MyPaddings.lowPadding(
                                     child: Text(
-                                  "Prof.Dr.Osman SAMANCI",
+                                  widget.podcastSerie.publisherName!,
                                   style: MyTextstyles.bodyText1(),
                                 ))
                               ],
@@ -84,8 +91,11 @@ class _PodcastPageState extends State<PodcastPage> {
                         width: 500,
                         child: Stack(
                           children: [
-                            Image.asset("assets/images/photo1.jpg",
-                                height: 300, width: 500, fit: BoxFit.cover),
+                            Image.asset(
+                                "assets/images/${widget.podcastSerie.coverPhoto}",
+                                height: 300,
+                                width: 500,
+                                fit: BoxFit.cover),
                             Container(
                               height: 300,
                               width: 500,
@@ -108,27 +118,24 @@ class _PodcastPageState extends State<PodcastPage> {
                     child: Column(
                       children: [
                         podcastDesc(),
-                        podcastContent(
-                            image: "photo1.jpg",
-                            title1: MyTexts.articleSerieTitle4,
-                            title2: "Ahtapot Yayımcı Anlatıyor",
-                            isPlaying: true,
-                            time: "23:12",
-                            value: 0),
-                        podcastContent(
-                            image: "photo1.jpg",
-                            title1: "Okul ve Öğretmen",
-                            title2: "Ahtapot Yayımcı Anlatıyor",
-                            isPlaying: false,
-                            time: "23:12",
-                            value: 0),
-                        podcastContent(
-                            image: "photo1.jpg",
-                            title1: "Öğrenci ve Öğretmen",
-                            title2: "Ahtapot Yayımcı Anlatıyor",
-                            isPlaying: false,
-                            time: "23:12",
-                            value: 0)
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: widget.podcastSerie.podcasts!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return podcastContent(
+                                  image: widget
+                                      .podcastSerie.podcasts![index].coverPhoto,
+                                  title1: widget
+                                      .podcastSerie.podcasts![index].title,
+                                  title2: widget.podcastSerie.podcasts![index]
+                                      .publisherName,
+                                  isPlaying: widget
+                                      .podcastSerie.podcasts![index].isPlaying,
+                                  time: "23:12",
+                                  value: 0);
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -169,7 +176,7 @@ class _PodcastPageState extends State<PodcastPage> {
   Padding podcastDesc() {
     return MyPaddings.lowPadding(
       child: Text(
-        MyTexts.welcomeDesc,
+        widget.podcastSerie.desc!,
         style: MyTextstyles.bodyText1(),
       ),
     );

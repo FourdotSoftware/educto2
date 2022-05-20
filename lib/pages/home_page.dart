@@ -1,6 +1,11 @@
-import 'package:educto2/main.dart';
-import 'package:educto2/pages/content_page.dart';
-import 'package:educto2/pages/last_edit_page.dart';
+import 'package:educto2/widgets/my_drawer.dart';
+
+import '../main.dart';
+import '../models/content_model.dart';
+import '../models/content_model.dart';
+import '../models/content_model.dart';
+import 'content_page.dart';
+import 'last_edit_page.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/my_colors.dart';
@@ -9,7 +14,70 @@ import '../consts/my_texts.dart';
 import '../consts/my_textstyles.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
+  final List<ContentModel> sonEklenenList = [
+    ContentModel(
+      detailPhoto: "photo1.jpg",
+      viewCount: 26,
+      title: "Evdeki Krizi Doğru Yönetme",
+      content: MyTexts.loremIpsum,
+      coverPhoto: "photo1.jpg",
+      isLiked: true,
+    ),
+    ContentModel(
+        detailPhoto: "photo1.jpg",
+        viewCount: 34726,
+        title: "Sınıftaki Krizi Doğru Yönetme",
+        content: MyTexts.loremIpsum,
+        coverPhoto: "photo1.jpg",
+        isLiked: false),
+    ContentModel(
+        detailPhoto: "photo1.jpg",
+        viewCount: 7626,
+        title: "Okuldaki Krizi Doğru Yönetme",
+        content: MyTexts.loremIpsum,
+        coverPhoto: "photo1.jpg",
+        isLiked: false)
+  ];
+
+  final List<ContentModel> enCokOkunanlarList = [
+    ContentModel(
+        detailPhoto: "photo1.jpg",
+        viewCount: 26,
+        title: "Dijital Çağda Öğretmen Olmak",
+        content: MyTexts.loremIpsum,
+        coverPhoto: "photo1.jpg",
+        isLiked: false),
+    ContentModel(
+        detailPhoto: "photo1.jpg",
+        viewCount: 34726,
+        title: "Sınıftaki Krizi Doğru Yönetme",
+        content: MyTexts.loremIpsum,
+        coverPhoto: "photo1.jpg",
+        isLiked: false),
+    ContentModel(
+        detailPhoto: "photo1.jpg",
+        viewCount: 7626,
+        title: "Okuldaki Krizi Doğru Yönetme",
+        content: MyTexts.loremIpsum,
+        coverPhoto: "photo1.jpg",
+        isLiked: false),
+    ContentModel(
+        detailPhoto: "photo1.jpg",
+        viewCount: 34726,
+        title: "Sınıftaki Krizi Doğru Yönetme",
+        content: MyTexts.loremIpsum,
+        coverPhoto: "photo1.jpg",
+        isLiked: false),
+    ContentModel(
+        detailPhoto: "photo1.jpg",
+        viewCount: 7626,
+        title: "Okuldaki Krizi Doğru Yönetme",
+        content: MyTexts.loremIpsum,
+        coverPhoto: "photo1.jpg",
+        isLiked: false)
+  ];
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -17,6 +85,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var scaffoldKey1 = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return homePage(key: scaffoldKey1);
@@ -26,7 +95,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
           key: key,
-          endDrawer: drawer(context: context),
+          endDrawer: MyDrawer(),
           bottomNavigationBar: navBar(context),
           backgroundColor: MyColors.secondary,
           appBar: appBar(
@@ -40,41 +109,20 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 slider(),
-                lastAdded(context: context, page: const LastEditPage()),
+                lastAdded(context: context, page: LastEditPage()),
                 MyPaddings.pagePaddingSymmetric(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      contentBar(
-                          image: "photo1.jpg",
-                          readCount: "1069",
-                          title: MyTexts.contentTitle,
-                          shortDesc: MyTexts.contentShort,
-                          context: context,
-                          page: const ContentPage()),
-                      contentBar(
-                          image: "photo1.jpg",
-                          readCount: "785",
-                          title: MyTexts.contentTitle2,
-                          shortDesc: MyTexts.contentShort,
-                          context: context,
-                          page: const ContentPage()),
-                      contentBar(
-                          image: "photo1.jpg",
-                          readCount: "1069",
-                          title: MyTexts.contentTitle,
-                          shortDesc: MyTexts.contentShort,
-                          context: context,
-                          page: const ContentPage()),
-                      contentBar(
-                          image: "photo1.jpg",
-                          readCount: "785",
-                          title: MyTexts.contentTitle2,
-                          shortDesc: MyTexts.contentShort,
-                          context: context,
-                          page: const ContentPage())
-                    ],
-                  ),
+                      children: List.generate(
+                          widget.sonEklenenList.length,
+                          (index) => contentBar(
+                              image: widget.sonEklenenList[index].coverPhoto,
+                              readCount: widget.sonEklenenList[index].viewCount
+                                  .toString(),
+                              title: widget.sonEklenenList[index].title,
+                              shortDesc: widget.sonEklenenList[index].content,
+                              context: context,
+                              page: ContentPage(
+                                  content: widget.sonEklenenList[index])))),
                 ),
                 MyPaddings.pagePadding(
                   child: Text(
@@ -85,46 +133,21 @@ class _HomePageState extends State<HomePage> {
                 MyPaddings.pagePaddingSymmetric(
                   child: SizedBox(
                     height: 150,
-                    child: ListView(
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      children: [
-                        mostReadField(
-                            title: MyTexts.contentTitle3,
-                            image: "photo1.jpg",
-                            readCount: "5612",
-                            context: context,
-                            page: const ContentPage()),
-                        mostReadField(
-                            title: MyTexts.contentTitle4,
-                            image: "photo1.jpg",
-                            readCount: "4312",
-                            context: context,
-                            page: const ContentPage()),
-                        mostReadField(
-                            title: MyTexts.contentTitle5,
-                            image: "photo1.jpg",
-                            readCount: "4172",
-                            context: context,
-                            page: const ContentPage()),
-                        mostReadField(
-                            title: MyTexts.contentTitle6,
-                            image: "photo1.jpg",
-                            readCount: "3291",
-                            context: context,
-                            page: const ContentPage()),
-                        mostReadField(
-                            title: MyTexts.contentTitle5,
-                            image: "photo1.jpg",
-                            readCount: "4172",
-                            context: context,
-                            page: const ContentPage()),
-                        mostReadField(
-                            title: MyTexts.contentTitle6,
-                            image: "photo1.jpg",
-                            readCount: "3291",
-                            context: context,
-                            page: const ContentPage()),
-                      ],
+                      itemCount: widget.enCokOkunanlarList.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          mostReadField(
+                              title: widget.enCokOkunanlarList[index].title,
+                              image:
+                                  widget.enCokOkunanlarList[index].coverPhoto,
+                              readCount: widget
+                                  .enCokOkunanlarList[index].viewCount
+                                  .toString(),
+                              context: context,
+                              page: ContentPage(
+                                content: widget.enCokOkunanlarList[index],
+                              )),
                     ),
                   ),
                 )
@@ -286,13 +309,14 @@ Icon notifications() => const Icon(Icons.notifications_outlined);
 
 Icon haveNoti() =>
     const Icon(Icons.fiber_manual_record, color: (MyColors.primary), size: 12);
-Widget contentBar(
-        {String? image,
-        String? readCount,
-        String? title,
-        String? shortDesc,
-        BuildContext? context,
-        Widget? page = const ContentPage()}) =>
+Widget contentBar({
+  String? image,
+  String? readCount,
+  String? title,
+  String? shortDesc,
+  BuildContext? context,
+  Widget? page,
+}) =>
     InkWell(
       onTap: () {
         Navigator.push(
@@ -302,40 +326,45 @@ Widget contentBar(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
           children: [
             contentImageFeild(image: image, readCount: readCount, isMini: true),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                MyPaddings.lowPadding(
-                    child: Text(title!, style: MyTextstyles.title3())),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      child: Container(
-                        width: 3,
-                        height: 31,
-                        decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                colors: [
-                              MyColors.primary,
-                              MyColors.gradientEnd
-                            ])),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  MyPaddings.lowPadding(
+                      child: Text(title!, style: MyTextstyles.title3())),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Container(
+                          width: 3,
+                          height: 31,
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                  colors: [
+                                MyColors.primary,
+                                MyColors.gradientEnd
+                              ])),
+                        ),
                       ),
-                    ),
-                    Text(
-                      shortDesc!,
-                      style: MyTextstyles.bodyText2(),
-                    ),
-                  ],
-                ),
-              ],
+                      Expanded(
+                        child: Text(
+                          shortDesc!,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: MyTextstyles.bodyText2(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             )
           ],
         ),
@@ -403,10 +432,14 @@ Widget mostReadField(
           children: [
             contentImageFeild(
                 image: image!, readCount: readCount!, isMini: false),
-            Text(
-              title!,
-              style: MyTextstyles.bodyText2(isLight: true, isBold: true),
-              textAlign: TextAlign.center,
+            Container(
+              width: 95,
+              child: Text(
+                title!,
+                style: MyTextstyles.bodyText2(isLight: true, isBold: true),
+                textAlign: TextAlign.center,
+                maxLines: 2,
+              ),
             )
           ],
         ),

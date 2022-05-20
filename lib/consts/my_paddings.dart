@@ -1,4 +1,4 @@
-import 'package:educto2/consts/my_texts.dart';
+import 'my_texts.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'my_textstyles.dart';

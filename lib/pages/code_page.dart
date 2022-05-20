@@ -1,4 +1,4 @@
-import 'package:educto2/pages/interest_page.dart';
+import 'interest_page.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/my_colors.dart';

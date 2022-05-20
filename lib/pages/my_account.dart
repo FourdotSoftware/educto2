@@ -1,7 +1,14 @@
-import 'package:educto2/main.dart';
-import 'package:educto2/pages/for_me_page.dart';
-import 'package:educto2/pages/my_favorites_page.dart';
-import 'package:educto2/pages/profile_page.dart';
+import 'package:educto2/models/podcast_model.dart';
+import 'package:educto2/models/podcast_serie_model.dart';
+import 'package:educto2/models/user_model.dart';
+import 'package:educto2/widgets/my_drawer.dart';
+
+import '../main.dart';
+import '../models/content_model.dart';
+import '../models/content_serie_model.dart';
+import 'for_me_page.dart';
+import 'my_favorites_page.dart';
+import 'profile_page.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/my_colors.dart';
@@ -30,14 +37,337 @@ class _MyAccountPageState extends State<MyAccountPage> {
     return SafeArea(
       child: Scaffold(
         key: key,
-        endDrawer: drawer(context: context),
+        endDrawer: MyDrawer(),
         bottomNavigationBar: navBar(context),
         backgroundColor: MyColors.navbar,
         appBar: appBar(title: MyTexts.myAccount, key: key, context: context),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              profilField(context: context, page: ProfilePage(context)),
+              profilField(
+                  context: context,
+                  page: ProfilePage(
+                      user: UserModel(
+                          coverPhoto: "photo1.jpg",
+                          profilePhoto: "logo.png",
+                          publisherName: "Sedat AKKUŞ",
+                          publisherMail: "furkan@fourdor.net",
+                          bio: MyTexts.loremIpsum,
+                          followerCount: "43443",
+                          contentCount: "2346",
+                          readcount: "8765",
+                          podcastSeries: [
+                        PodcastSerieModel(
+                            coverPhoto: "photo1.jpg",
+                            title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                            publisherIcon: Icons.account_box,
+                            publisherName: "Doç.Dr.Yavuz SAMUR",
+                            desc: MyTexts.loremIpsum,
+                            podcasts: [
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: false),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                            ]),
+                        PodcastSerieModel(
+                            coverPhoto: "photo1.jpg",
+                            title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                            publisherIcon: Icons.account_box,
+                            publisherName: "Doç.Dr.Yavuz SAMUR",
+                            desc: MyTexts.loremIpsum,
+                            podcasts: [
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: false),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                            ]),
+                        PodcastSerieModel(
+                            coverPhoto: "photo1.jpg",
+                            title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                            publisherIcon: Icons.account_box,
+                            publisherName: "Doç.Dr.Yavuz SAMUR",
+                            desc: MyTexts.loremIpsum,
+                            podcasts: [
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: false),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                            ]),
+                        PodcastSerieModel(
+                            coverPhoto: "photo1.jpg",
+                            title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                            publisherIcon: Icons.account_box,
+                            publisherName: "Doç.Dr.Yavuz SAMUR",
+                            desc: MyTexts.loremIpsum,
+                            podcasts: [
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: false),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                            ]),
+                        PodcastSerieModel(
+                            coverPhoto: "photo1.jpg",
+                            title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                            publisherIcon: Icons.account_box,
+                            publisherName: "Doç.Dr.Yavuz SAMUR",
+                            desc: MyTexts.loremIpsum,
+                            podcasts: [
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: false),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                              PodcastModel(
+                                  coverPhoto: "photo1.jpg",
+                                  title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                                  publisherIcon: Icons.account_box,
+                                  publisherName: "Doç.Dr.Yavuz SAMUR",
+                                  icon: Icons.abc_outlined,
+                                  isPlaying: true),
+                            ]),
+                      ],
+                          contentSeries: [
+                        ContentSerieModel(
+                            coverPhoto: "photo1.jpg",
+                            title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                            publisherIcon: Icons.account_box,
+                            publisherName: "Doç.Dr.Yavuz SAMUR",
+                            desc: MyTexts.welcomeDesc,
+                            contents: [
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  isLiked: false,
+                                  publisherName: "Sedat AKKUŞ",
+                                  publisherIcon: "AA",
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  isLiked: false,
+                                  publisherName: "Sedat AKKUŞ",
+                                  publisherIcon: "AA",
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  isLiked: false,
+                                  publisherName: "Sedat AKKUŞ",
+                                  publisherIcon: "AA",
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  isLiked: false,
+                                  publisherName: "Sedat AKKUŞ",
+                                  publisherIcon: "AA",
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  isLiked: false,
+                                  publisherName: "Sedat AKKUŞ",
+                                  publisherIcon: "AA",
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                            ]),
+                        ContentSerieModel(
+                            coverPhoto: "photo1.jpg",
+                            title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                            publisherIcon: Icons.account_box,
+                            publisherName: "Doç.Dr.Yavuz SAMUR",
+                            desc: MyTexts.welcomeDesc,
+                            contents: [
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                            ]),
+                        ContentSerieModel(
+                            coverPhoto: "photo1.jpg",
+                            title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                            publisherIcon: Icons.account_box,
+                            publisherName: "Doç.Dr.Yavuz SAMUR",
+                            desc: MyTexts.welcomeDesc,
+                            contents: [
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  isLiked: false,
+                                  publisherName: "Sedat AKKUŞ",
+                                  publisherIcon: "AA",
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  isLiked: false,
+                                  publisherName: "Sedat AKKUŞ",
+                                  publisherIcon: "AA",
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  isLiked: false,
+                                  publisherName: "Sedat AKKUŞ",
+                                  publisherIcon: "AA",
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                            ]),
+                        ContentSerieModel(
+                            coverPhoto: "photo1.jpg",
+                            title: "Eğitimde Oyunlaştırma Yazı Dizisi",
+                            publisherIcon: Icons.account_box,
+                            publisherName: "Doç.Dr.Yavuz SAMUR",
+                            desc: MyTexts.welcomeDesc,
+                            contents: [
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  isLiked: false,
+                                  publisherName: "Sedat AKKUŞ",
+                                  publisherIcon: "AA",
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                              ContentModel(
+                                  detailPhoto: "photo1.jpg",
+                                  viewCount: 26,
+                                  isLiked: false,
+                                  publisherName: "Sedat AKKUŞ",
+                                  publisherIcon: "AA",
+                                  title: "Oyunlaştırma Nedir?",
+                                  content: MyTexts.contentShort,
+                                  coverPhoto: "photo1.jpg"),
+                            ]),
+                      ]))),
               menuItems()
             ],
           ),

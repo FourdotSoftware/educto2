@@ -1,5 +1,5 @@
-import 'package:educto2/main.dart';
-import 'package:educto2/pages/home_page.dart';
+import '../main.dart';
+import 'home_page.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/my_borders.dart';
@@ -45,62 +45,17 @@ class _InterestPageState extends State<InterestPage> {
                   MyPaddings.standartPadding(
                       child: welcomeSubTitle(data: MyTexts.interestDesc)),
                   Wrap(
-                    alignment: WrapAlignment.start,
-                    children: [
-                      interestChip(
-                          title: "Teknoloji",
-                          isSelected: button1Selected,
-                          onPressedd: () {
-                            setState(() {
-                              button1Selected = !button1Selected;
-                            });
-                          }),
-                      interestChip(
-                          title: "Bilim",
-                          isSelected: button2Selected,
-                          onPressedd: () {
-                            setState(() {
-                              button2Selected = !button2Selected;
-                            });
-                          }),
-                      interestChip(
-                          title: "Müzik",
-                          isSelected: button3Selected,
-                          onPressedd: () {
-                            setState(() {
-                              button3Selected = !button3Selected;
-                            });
-                          }),
-                      interestChip(
-                          title: "Spor",
-                          isSelected: button5Selected,
-                          onPressedd: () {
-                            setState(() {
-                              button5Selected = !button5Selected;
-                            });
-                          }),
-                      interestChip(
-                          title: "Coğrafya",
-                          isSelected: button4Selected,
-                          onPressedd: () {
-                            setState(() {
-                              button4Selected = !button4Selected;
-                            });
-                          }),
-                      interestChip(title: "Matematik"),
-                      interestChip(title: "Türkçe"),
-                      interestChip(title: "Resim"),
-                      interestChip(title: "Teknoloji"),
-                      interestChip(title: "Bilim"),
-                      interestChip(title: "Müzik"),
-                      interestChip(title: "Coğrafya"),
-                      interestChip(title: "Spor"),
-                      interestChip(title: "Matematik"),
-                      interestChip(title: "Türkçe"),
-                      interestChip(title: "Resim"),
-                      interestChip(title: "Teknoloji"),
-                    ],
-                  ),
+                      alignment: WrapAlignment.start,
+                      children: List.generate(
+                          17,
+                          (int index) => interestChip(
+                              title: "Teknoloji",
+                              isSelected: button1Selected,
+                              onPressedd: () {
+                                setState(() {
+                                  button1Selected = !button1Selected;
+                                });
+                              }))),
                   MyPaddings.standartPadding(
                     child: nextButton(
                         buttonText: MyTexts.interestButton,
