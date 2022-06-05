@@ -10,6 +10,8 @@ import '../consts/my_paddings.dart';
 import '../consts/my_texts.dart';
 import '../consts/my_textstyles.dart';
 import '../models/content_model.dart';
+import '../my_state.dart';
+import '../widgets/interest_chip.dart';
 import 'home_page.dart';
 import 'interest_page.dart';
 
@@ -98,10 +100,10 @@ class ForMePage extends StatefulWidget {
     )
   ];
   final List<InterestModel> interestList = [
-    InterestModel(title: "Teknoloji", isSelected: true),
-    InterestModel(title: "fizik", isSelected: false),
-    InterestModel(title: "Matematik", isSelected: true),
-    InterestModel(title: "Kimya", isSelected: false),
+    InterestModel(title: "Teknoloji",id: 1),
+    InterestModel(title: "fizik", id: 2),
+    InterestModel(title: "Matematik",id: 3),
+    InterestModel(title: "Kimya",id: 4),
   ];
 
   @override
@@ -133,10 +135,21 @@ class _ForMePageState extends State<ForMePage> {
                     scrollDirection: Axis.horizontal,
                     itemCount: widget.interestList.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return interestChip(
+                      return InterestChip(
+                        id: widget.interestList[index].id ,
                           title: widget.interestList[index].title!,
                           isLight: !widget.interestList[index].isSelected!,
-                          isSelected: widget.interestList[index].isSelected!);
+                          isSelected:   MyState.forMeSelectetIDs.contains(widget.interestList[index].id),
+                          onPressedd: () {
+                            int id=widget.interestList[index].id;
+          setState(() {
+             MyState.forMeSelectetIDs.contains(id)?
+             MyState.forMeSelectetIDs.remove(id):
+             MyState.forMeSelectetIDs.add(id);
+            
+          });
+        },
+                         );
                     }),
               ),
               myDvider(),

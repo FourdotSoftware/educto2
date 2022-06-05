@@ -2,6 +2,7 @@ import 'package:educto2/models/podcast_model.dart';
 import 'package:educto2/models/podcast_serie_model.dart';
 import 'package:educto2/models/user_model.dart';
 import 'package:educto2/widgets/my_drawer.dart';
+import 'package:educto2/widgets/navbar.dart';
 
 import '../main.dart';
 import '../models/content_model.dart';
@@ -38,7 +39,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
       child: Scaffold(
         key: key,
         endDrawer: MyDrawer(),
-        bottomNavigationBar: navBar(context),
+        bottomNavigationBar: Navbar(),
         backgroundColor: MyColors.navbar,
         appBar: appBar(title: MyTexts.myAccount, key: key, context: context),
         body: SingleChildScrollView(
@@ -369,7 +370,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             ]),
                       ]))),
               menuItems()
-            ],
+            ], 
           ),
         ),
       ),

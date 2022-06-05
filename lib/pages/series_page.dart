@@ -1,6 +1,7 @@
 import 'package:educto2/models/content_model.dart';
 import 'package:educto2/models/content_serie_model.dart';
 import 'package:educto2/widgets/my_drawer.dart';
+import 'package:educto2/widgets/navbar.dart';
 
 import 'profile_page.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,8 @@ import 'content_page.dart';
 import 'home_page.dart';
 
 class SeriesPage extends StatefulWidget {
-  const SeriesPage({Key? key, required this.data}) : super(key: key);
-  final ContentSerieModel data;
+  const SeriesPage({Key? key, required this.contentSerie}) : super(key: key);
+  final ContentSerieModel contentSerie;
 
   @override
   State<SeriesPage> createState() => _SeriesPageState();
@@ -34,7 +35,7 @@ class _SeriesPageState extends State<SeriesPage> {
         key: key,
         endDrawer: MyDrawer(),
         backgroundColor: MyColors.secondary,
-        bottomNavigationBar: navBar(context!),
+        bottomNavigationBar: Navbar(),
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -54,7 +55,7 @@ class _SeriesPageState extends State<SeriesPage> {
                         child: Row(
                           children: [
                             Text(
-                              widget.data.title!,
+                              widget.contentSerie.title!,
                               style: MyTextstyles.title2(),
                             ),
                             MyPaddings.pagePaddingSymmetric4(
@@ -65,11 +66,11 @@ class _SeriesPageState extends State<SeriesPage> {
                       MyPaddings.pagePaddingSymmetric(
                         child: Row(
                           children: [
-                            Icon(widget.data.publisherIcon,
+                            Icon(widget.contentSerie.publisherIcon,
                                 color: MyColors.tertiary),
                             MyPaddings.lowPadding(
                                 child: Text(
-                              widget.data.publisherName!,
+                              widget.contentSerie.publisherName!,
                               style: MyTextstyles.bodyText1(),
                             ))
                           ],
@@ -82,7 +83,7 @@ class _SeriesPageState extends State<SeriesPage> {
                     width: 500,
                     child: Stack(
                       children: [
-                        Image.asset("assets/images/${widget.data.coverPhoto} ",
+                        Image.asset("assets/images/${widget.contentSerie.coverPhoto} ",
                             height: 300, width: 500, fit: BoxFit.cover),
                         Container(
                           height: 300,
@@ -108,22 +109,22 @@ class _SeriesPageState extends State<SeriesPage> {
                   children: [
                     MyPaddings.lowPadding(
                       child: Text(
-                        widget.data.desc!,
+                        widget.contentSerie.desc!,
                         style: MyTextstyles.bodyText1(),
                       ),
                     ),
                     MyPaddings.standartPadding(),
                     Expanded(
                       child: ListView.builder(
-                          itemCount: widget.data.contents!.length,
+                          itemCount: widget.contentSerie.contents!.length,
                           itemBuilder: (BuildContext context, int index) {
                             return articleField(
                                 context: context,
                                 page: ContentPage(
-                                    content: widget.data.contents![index]),
-                                title: widget.data.contents![index].title,
-                                titleDesc: widget.data.contents![index].content,
-                                image: widget.data.contents![index].coverPhoto,
+                                    content: widget.contentSerie.contents![index]),
+                                title: widget.contentSerie.contents![index].title,
+                                titleDesc: widget.contentSerie.contents![index].content,
+                                image: widget.contentSerie.contents![index].coverPhoto,
                                 no: (index + 1).toString());
                           }),
                     )

@@ -1,5 +1,6 @@
 import 'package:educto2/pages/content_page.dart';
 import 'package:educto2/widgets/my_drawer.dart';
+import 'package:educto2/widgets/navbar.dart';
 
 import '../main.dart';
 import 'package:flutter/material.dart';
@@ -114,7 +115,7 @@ class _MyFavoritesPageState extends State<MyFavoritesPage> {
       child: Scaffold(
         key: key,
         endDrawer: MyDrawer(),
-        bottomNavigationBar: navBar(context),
+        bottomNavigationBar: Navbar(),
         backgroundColor: MyColors.secondary,
         appBar:
             appBar(title: MyTexts.favoritesTitle, key: key, context: context),

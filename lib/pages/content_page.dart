@@ -1,5 +1,6 @@
 import 'package:educto2/models/content_model.dart';
 import 'package:educto2/widgets/my_drawer.dart';
+import 'package:educto2/widgets/navbar.dart';
 
 import '../main.dart';
 import 'login_page.dart';
@@ -35,7 +36,7 @@ class _ContentPageState extends State<ContentPage> {
       child: Scaffold(
         key: key,
         endDrawer: MyDrawer(),
-        bottomNavigationBar: navBar(context),
+        bottomNavigationBar: Navbar(),
         backgroundColor: MyColors.secondary,
         body: CustomScrollView(slivers: [
           SliverAppBar(

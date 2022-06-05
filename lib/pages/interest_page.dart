@@ -1,3 +1,7 @@
+import 'package:educto2/models/interest_model.dart';
+import 'package:educto2/my_state.dart';
+import 'package:educto2/widgets/interest_chip.dart';
+
 import '../main.dart';
 import 'home_page.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +21,24 @@ class InterestPage extends StatefulWidget {
 }
 
 class _InterestPageState extends State<InterestPage> {
-  bool button1Selected = false;
-  bool button2Selected = false;
-  bool button3Selected = false;
-  bool button4Selected = false;
-  bool button5Selected = false;
+List<InterestModel> interestsList=[
+InterestModel(id: 1,title: "Teknoloji"),
+InterestModel(id: 2,title: "Kimya"),
+
+InterestModel(id: 3,title: "Fizik"),
+InterestModel(id: 4,title: "Türkçe"),
+InterestModel(id: 5,title: "Matematik"),
+InterestModel(id: 6,title: "Din"),
+InterestModel(id: 7,title: "Fen"),
+InterestModel(id: 7,title: "Biyoloji"),
+InterestModel(id: 8,title: "Felsefe"),
+InterestModel(id: 9,title: "spor"),
+InterestModel(id: 10,title: "Resim"),
+InterestModel(id: 11,title: "Sanat")
+
+
+
+];
 
   @override
   Widget build(BuildContext context) {
@@ -47,15 +64,23 @@ class _InterestPageState extends State<InterestPage> {
                   Wrap(
                       alignment: WrapAlignment.start,
                       children: List.generate(
-                          17,
-                          (int index) => interestChip(
-                              title: "Teknoloji",
-                              isSelected: button1Selected,
-                              onPressedd: () {
-                                setState(() {
-                                  button1Selected = !button1Selected;
-                                });
-                              }))),
+                          interestsList.length,
+                          (int index) => InterestChip(
+                            isSelected: MyState.selectedInterestIDs.contains(interestsList[index].id) ,
+                            onPressedd: (){
+                              setState(() {
+                                MyState.selectedInterestIDs.contains(interestsList[index].id)?
+                                MyState.selectedInterestIDs.remove(interestsList[index].id ):
+MyState.selectedInterestIDs.add(interestsList[index].id );
+                                
+                              });
+                            },
+                            id: interestsList[index].id ,
+                             title:interestsList[index].title! )
+
+
+
+)),
                   MyPaddings.standartPadding(
                     child: nextButton(
                         buttonText: MyTexts.interestButton,
@@ -77,24 +102,5 @@ class _InterestPageState extends State<InterestPage> {
   }
 }
 
-Widget interestChip(
-        {bool isSelected = false,
-        String title = "boş",
-        bool isLight = false,
-        void Function()? onPressedd}) =>
-    Padding(
-      padding: EdgeInsets.symmetric(horizontal: 3),
-      child: ElevatedButton(
-          onPressed: onPressedd,
-          child: Text(title,
-              style:
-                  MyTextstyles.bodyText1(isLight: isLight ? true : isSelected)),
-          style: ButtonStyle(
-            minimumSize: MaterialStateProperty.all(Size(78, 33)),
-            padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
-            backgroundColor: MaterialStateProperty.all(
-                isSelected ? MyColors.primary : MyColors.secondary),
-            shape: MaterialStateProperty.all(
-                MyBorders.border2(isSelectedd: isSelected, isLight: isLight)),
-          )),
-    );
+
+   

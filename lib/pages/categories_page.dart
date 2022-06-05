@@ -1,4 +1,5 @@
 import 'package:educto2/models/categori_model.dart';
+import 'package:educto2/my_state.dart';
 import 'package:educto2/pages/content_page.dart';
 import 'package:educto2/widgets/my_drawer.dart';
 
@@ -10,6 +11,7 @@ import '../consts/my_paddings.dart';
 import '../consts/my_texts.dart';
 import '../consts/my_textstyles.dart';
 import '../models/content_model.dart';
+import '../widgets/navbar.dart';
 import 'for_me_page.dart';
 import 'home_page.dart';
 
@@ -74,14 +76,14 @@ class CategoriesPage extends StatefulWidget {
     )
   ];
   final List<CategoriModel> categoriList = [
-    CategoriModel(title: "Matematik", icon: Icons.add_box),
-    CategoriModel(title: "Fizik", icon: Icons.add_box),
-    CategoriModel(title: "Kimya", icon: Icons.add_box),
-    CategoriModel(title: "Biyoloji", icon: Icons.add_box),
-    CategoriModel(title: "Fen Bilimleri", icon: Icons.add_box),
-    CategoriModel(title: "Türkçe", icon: Icons.add_box),
-    CategoriModel(title: "Sosyal Bilimler", icon: Icons.add_box),
-    CategoriModel(title: "Din", icon: Icons.add_box)
+    CategoriModel(title: "Matematik", icon: Icons.add_box,id: 1),
+    CategoriModel(title: "Fizik", icon: Icons.add_box,id: 2),
+    CategoriModel(title: "Kimya", icon: Icons.add_box,id: 3),
+    CategoriModel(title: "Biyoloji", icon: Icons.add_box,id: 4),
+    CategoriModel(title: "Fen Bilimleri", icon: Icons.add_box,id: 5),
+    CategoriModel(title: "Türkçe", icon: Icons.add_box,id: 6),
+    CategoriModel(title: "Sosyal Bilimler", icon: Icons.add_box,id:7),
+    CategoriModel(title: "Din", icon: Icons.add_box,id: 8)
   ];
 
   @override
@@ -101,7 +103,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
       child: Scaffold(
           key: key,
           endDrawer: MyDrawer(),
-          bottomNavigationBar: navBar(context),
+          bottomNavigationBar: Navbar(),
           backgroundColor: MyColors.secondary,
           appBar: appBar(title: MyTexts.categories, key: key, context: context),
           body: MyPaddings.pagePadding(
@@ -115,6 +117,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       itemCount: widget.categoriList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return categoryButton(
+                          id: widget.categoriList[index].id,
                             title: widget.categoriList[index].title,
                             icon: widget.categoriList[index].icon);
                       }),
@@ -142,28 +145,35 @@ class _CategoriesPageState extends State<CategoriesPage> {
   }
 
   Widget categoryButton(
-          {String? title, IconData? icon, bool isSelected = false}) =>
+          {String? title, IconData? icon,required int id}) =>
       MyPaddings.spacePadding(
-        child: Column(
-          children: [
-            Container(
-              child: Icon(icon, color: Colors.white),
-              height: 56,
-              width: 56,
-              decoration: BoxDecoration(
-                  color: isSelected ? MyColors.navbar : MyColors.primary,
-                  borderRadius: BorderRadius.circular(8)),
-            ),
-            MyPaddings.standartPadding(
-                child: Container(
-              width: 56,
-              child: Text(title!,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: MyTextstyles.bodyText2(isLight: true)),
-            ))
-          ],
+        child:InkWell (
+          onTap: () {
+            setState(() {
+             MyState.selectedCategoryID=id;
+            });
+          },
+          child: Column(
+            children: [
+              Container(
+                child: Icon(icon, color: Colors.white),
+                height: 56,
+                width: 56,
+                decoration: BoxDecoration(
+                    color: MyState.selectedCategoryID==id ? MyColors.navbar : MyColors.primary,
+                    borderRadius: BorderRadius.circular(8)),
+              ),
+              MyPaddings.standartPadding(
+                  child: Container(
+                width: 56,
+                child: Text(title!,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: MyTextstyles.bodyText2(isLight: true)),
+              ))
+            ],
+          ),
         ),
       );
 }

@@ -1,5 +1,6 @@
 import 'package:educto2/models/podcast_model.dart';
 import 'package:educto2/widgets/my_drawer.dart';
+import 'package:educto2/widgets/navbar.dart';
 
 import '../models/podcast_serie_model.dart';
 import 'profile_page.dart';
@@ -14,8 +15,9 @@ import 'content_page.dart';
 import 'home_page.dart';
 
 class PodcastPage extends StatefulWidget {
-  PodcastPage({Key? key, required this.podcastSerie}) : super(key: key);
+  PodcastPage({Key? key, required this.podcastSerie, required this.playingPodcast}) : super(key: key);
   final PodcastSerieModel podcastSerie;
+  final PodcastModel playingPodcast;
 
   @override
   State<PodcastPage> createState() => _PodcastPageState();
@@ -36,7 +38,7 @@ class _PodcastPageState extends State<PodcastPage> {
         key: key,
         endDrawer: MyDrawer(),
         backgroundColor: MyColors.secondary,
-        bottomNavigationBar: navBar(context!),
+        bottomNavigationBar:Navbar(),
         body: Stack(
           alignment: Alignment.bottomLeft,
           children: [
@@ -153,13 +155,13 @@ class _PodcastPageState extends State<PodcastPage> {
                   child: Row(
                     children: [
                       profileContentPhoto(
-                          image: "photo1.jpg",
+                          image: widget.playingPodcast.coverPhoto,
                           isMini: true,
                           child: podCastIcon()),
                       contentColumn(
-                          title1: MyTexts.articleSerieTitle3,
-                          title2: "Ahtapot Yayımcı Anlatıyor",
-                          isPlaying: true,
+                          title1:widget.playingPodcast.title,
+                          title2:widget.playingPodcast.title,
+                          isPlaying: widget.playingPodcast.isPlaying,
                           time: "23:12",
                           value: 0)
                     ],

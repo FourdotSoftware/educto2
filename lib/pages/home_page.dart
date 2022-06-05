@@ -4,6 +4,7 @@ import '../main.dart';
 import '../models/content_model.dart';
 import '../models/content_model.dart';
 import '../models/content_model.dart';
+import '../widgets/navbar.dart';
 import 'content_page.dart';
 import 'last_edit_page.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
           key: key,
           endDrawer: MyDrawer(),
-          bottomNavigationBar: navBar(context),
+          bottomNavigationBar: Navbar(),
           backgroundColor: MyColors.secondary,
           appBar: appBar(
               isShowBackButton: false,

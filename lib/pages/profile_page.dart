@@ -1,5 +1,7 @@
+import 'package:educto2/models/podcast_model.dart';
 import 'package:educto2/models/user_model.dart';
 import 'package:educto2/widgets/my_drawer.dart';
+import 'package:educto2/widgets/navbar.dart';
 
 import '../models/content_model.dart';
 import '../models/content_serie_model.dart';
@@ -38,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Scaffold(
               key: key,
               endDrawer: MyDrawer(),
-              bottomNavigationBar: navBar(context!),
+              bottomNavigationBar:Navbar(),
               backgroundColor: MyColors.secondary,
               appBar: appBar(
                   title: MyTexts.autherProfile, key: key, context: context),
@@ -114,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 return profileContent(
                                     context: context,
                                     page: SeriesPage(
-                                      data: widget.user.contentSeries![index],
+                                      contentSerie: widget.user.contentSeries![index],
                                     ), //TODO
                                     image: widget
                                         .user.contentSeries![index].coverPhoto,
@@ -142,11 +144,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: MyPaddings.notificationPadding(
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: 0,
+                                itemCount: widget.user.podcastSeries!.length ,
                                 itemBuilder: (BuildContext context, int index) {
                                   return profileContent(
                                       context: context,
                                       page: PodcastPage(
+                                        playingPodcast:PodcastModel(coverPhoto: "photo1.jpg",
+                                        title: MyTexts.contentTitle,
+                                        isPlaying: true,
+                                        icon:Icons.mic ) ,
                                           podcastSerie: widget.user
                                               .podcastSeries![index]), //TODO
                                       title: widget

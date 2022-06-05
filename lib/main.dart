@@ -35,96 +35,10 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-Stack navBar(BuildContext context) {
-  return Stack(
-    children: [
-      Container(
-          margin: const EdgeInsets.only(top: 8),
-          color: MyColors.navbar,
-          child: Row(
-            children: [
-              Visibility(
-                visible: false,
-                maintainSize: true,
-                maintainAnimation: true,
-                maintainState: true,
-                child: navItem(
-                    icon: Icons.category_outlined, title: MyTexts.categories),
-              ),
-            ],
-          )),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          navItem(
-              icon: Icons.category_outlined,
-              title: MyTexts.categories,
-              contextt: context,
-              page: CategoriesPage()),
-          navItem(
-              icon: Icons.filter_list,
-              title: MyTexts.lastEditTitle,
-              contextt: context,
-              page: LastEditPage()),
-          navItem(
-              icon: Icons.home_outlined,
-              title: MyTexts.homePage,
-              isSelected: true,
-              contextt: context,
-              page: HomePage()),
-          navItem(
-              icon: Icons.favorite_outline,
-              title: MyTexts.favoritesTitle,
-              contextt: context,
-              page: MyFavoritesPage()),
-          navItem(
-              icon: Icons.account_circle_outlined,
-              title: MyTexts.myAccount,
-              contextt: context,
-              page: const MyAccountPage()),
-        ],
-      ),
-    ],
-  );
-}
 
-Widget navItem(
-        {IconData? icon,
-        String? title,
-        bool isSelected = false,
-        BuildContext? contextt,
-        Widget? page}) =>
-    InkWell(
-      onTap: () {
-        Navigator.push(
-            contextt!, MaterialPageRoute(builder: (context) => page!));
-      },
-      child: Stack(
-        children: [
-          Container(
-            //margin: EdgeInsets.only(bottom: 20),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: isSelected ? MyColors.primary : Colors.transparent),
-            child: MyPaddings.navbarPadding(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    icon,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    title!,
-                    style: MyTextstyles.navbar(),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+
+
+
 Column profileInfo({String? title, String? count}) => Column(
       children: [
         Text(
